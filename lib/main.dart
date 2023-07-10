@@ -56,6 +56,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  int _selectedIndex = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -67,6 +68,27 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
+
+  void _onItemTapped(int index){
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  static const List<Widget> pages = <Widget>[
+    Icon(
+      Icons.home_filled,
+      size: 150,
+    ),
+    Icon(
+      Icons.games_outlined,
+      size: 150,
+    ),
+    Icon(
+      Icons.person,
+      size: 150,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -117,11 +139,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 '$_counter',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
+              pages.elementAt(_selectedIndex)
             ],
           ),
         ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        selectedItemColor: Colors.white60,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
         items: const<BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.games_outlined), label: 'Missions'),
