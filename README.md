@@ -1,6 +1,6 @@
 # drivr
 
-A new Flutter project.
+Gamification of practice driving in Sweden
 
 ## Getting Started
 
