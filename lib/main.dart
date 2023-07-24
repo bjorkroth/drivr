@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'missions.dart';
+import 'models/profile_model.dart';
 import 'profile.dart';
-import 'counter.dart';
+import 'login.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+        create: (context) => ProfileModel(),
+        child: const MyApp(),
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -14,13 +21,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'drivr',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'drivr'),
-    );
+        title: 'drivr',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
+          useMaterial3: true,
+        ),
+        home: const MyHomePage(title: 'drivr'),
+      );
   }
 }
 
@@ -46,7 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   static const List<Widget> pages = <Widget>[
-    Counter(title: "drivr"),
+    Login(),
+    //Counter(title: "drivr"),
     Missions(),
     Profile(),
   ];
