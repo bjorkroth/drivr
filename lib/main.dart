@@ -1,18 +1,49 @@
+import 'package:drivr/widgets/login.dart';
+import 'package:drivr/widgets/missions.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'missions.dart';
+import 'widgets/home.dart';
 import 'models/profile_model.dart';
-import 'profile.dart';
-import 'login.dart';
+import 'widgets/profile.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-        create: (context) => ProfileModel(),
-        child: const MyApp(),
-    )
-  );
+  runApp(ChangeNotifierProvider(
+    create: (context) => ProfileModel(),
+    child: const MyApp(),
+  ));
 }
+
+final GoRouter _goRouter = GoRouter(routes: <RouteBase>[
+  GoRoute(
+    path: '/',
+    builder: (BuildContext context, GoRouterState state) {
+      return const MyHomePage(title: 'drivr');
+    },
+  ),
+  GoRoute(
+    path: '/profile',
+    builder: (BuildContext context, GoRouterState state) {
+      return const Profile();
+    },
+  ),
+  GoRoute(
+    path: '/missions',
+    builder: (BuildContext context, GoRouterState state) {
+      return const Missions();
+    },
+  ),
+  GoRoute(
+      path: '/login',
+      builder: (BuildContext context, GoRouterState state) {
+        return const Login();
+      }),
+  GoRoute(
+      path: '/home',
+      builder: (BuildContext context, GoRouterState state) {
+        return const MyHomePage(title: 'drivr');
+      })
+]);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -20,80 +51,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'drivr',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
-          useMaterial3: true,
-        ),
-        home: const MyHomePage(title: 'drivr'),
-      );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
-
-  static const List<Widget> pages = <Widget>[
-    Login(),
-    //Counter(title: "drivr"),
-    Missions(),
-    Profile(),
-  ];
-
-
-  void _onItemTapped(int index){
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: const IconButton(
-          icon: Icon(Icons.menu),
-          tooltip: 'Navigation menu',
-          onPressed: null,
-        ),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+    return
+      MaterialApp.router(
+      title: 'drivr',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
+        useMaterial3: true,
       ),
-      body: Center(
-        child: Expanded(
-          child: pages.elementAt(_selectedIndex)
-          ),
-        ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        selectedItemColor: Colors.white60,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: const<BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.games_outlined), label: 'Missions'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ]
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      debugShowCheckedModeBanner: false,
+      routerConfig: _goRouter,
     );
   }
 }

@@ -1,7 +1,10 @@
-import 'package:drivr/models/profile_model.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:provider/provider.dart';
+import '../models/profile_model.dart';
+import 'drivr_app_bar.dart';
+import 'drivr_bottom_bar.dart';
 
 @JsonSerializable()
 class FormData{
@@ -26,6 +29,7 @@ class _Login extends State<Login>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: DrivrAppBar(preferredSize: const Size.fromHeight(80.0), child: Container(),),
       body: Form(
         child: Scrollbar(
           child: Column(children: [
@@ -61,11 +65,14 @@ class _Login extends State<Login>{
 
               profileModel.setName(formData.name ?? "");
               profileModel.logInUser();
+
+              context.go('/profile');
             }, 
             child: const Text('Sign in'))
           ])
           )
-      )
+      ),
+      bottomNavigationBar: const DrivrBottomBar(),
     );
   }
 }

@@ -1,12 +1,17 @@
+import 'drivr_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'drivr_app_bar.dart';
 
 class Missions extends StatelessWidget{
   const Missions({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold (
-        body: Center(
+    return Scaffold (
+      appBar: DrivrAppBar(
+          preferredSize: const Size.fromHeight(80.0),
+          child: Container()),
+        body: const Center(
             child: Column(
               children: [
                 Icon(
@@ -17,7 +22,8 @@ class Missions extends StatelessWidget{
                 Text('Mission tree')
               ],
             )
-        )
+        ),
+        bottomNavigationBar: const DrivrBottomBar(),
     );
   }
 }
