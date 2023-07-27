@@ -1,5 +1,3 @@
-import 'package:drivr/widgets/drivr_app_bar.dart';
-import 'package:drivr/widgets/drivr_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'login.dart';
 

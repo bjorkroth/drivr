@@ -21,9 +21,12 @@ class Profile extends StatelessWidget{
                 size: 150,
               ),
               Consumer<ProfileModel>(builder: (context,profile,child){
-                return Text('Profile for ${profile.name}', style: const TextStyle(fontWeight: FontWeight.bold));
+                if(profile.isLoggedIn){
+                  return Text('Profile name ${profile.name}', style: const TextStyle(fontWeight: FontWeight.bold));
+                }
+                return const Column(children: [ Text('User is not logged in', style: TextStyle(fontWeight: FontWeight.bold))]);
               }),
-              const Text('Profile description')
+              // }),
             ],
           )
         ),

@@ -1,15 +1,18 @@
-import 'package:drivr/widgets/login.dart';
-import 'package:drivr/widgets/missions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'widgets/home.dart';
 import 'models/profile_model.dart';
 import 'widgets/profile.dart';
+import 'widgets/login.dart';
+import 'widgets/missions.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
+  runApp(ChangeNotifierProxyProvider(
     create: (context) => ProfileModel(),
+    update: (context,_,profile) {
+      if(profile == null) throw ArgumentError.notNull('profile');
+      return profile;
+    },
     child: const MyApp(),
   ));
 }
@@ -18,7 +21,7 @@ final GoRouter _goRouter = GoRouter(routes: <RouteBase>[
   GoRoute(
     path: '/',
     builder: (BuildContext context, GoRouterState state) {
-      return const MyHomePage(title: 'drivr');
+      return const Login();
     },
   ),
   GoRoute(
@@ -41,7 +44,7 @@ final GoRouter _goRouter = GoRouter(routes: <RouteBase>[
   GoRoute(
       path: '/home',
       builder: (BuildContext context, GoRouterState state) {
-        return const MyHomePage(title: 'drivr');
+        return const Login();
       })
 ]);
 

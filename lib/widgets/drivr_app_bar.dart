@@ -17,7 +17,7 @@ class DrivrAppBar extends PreferredSize{
             onPressed: null,
           ),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text('drivr'),
+          title: const Text('drivr'),
         )
       ],
     );
