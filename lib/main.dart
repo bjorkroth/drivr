@@ -1,3 +1,4 @@
+import 'package:drivr/data/missionlist.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -7,13 +8,17 @@ import 'widgets/login.dart';
 import 'widgets/missions.dart';
 
 void main() {
-  runApp(ChangeNotifierProxyProvider(
-    create: (context) => ProfileModel(),
-    update: (context,_,profile) {
-      if(profile == null) throw ArgumentError.notNull('profile');
-      return profile;
-    },
-    child: const MyApp(),
+  runApp(MultiProvider(providers: [
+    Provider(create: (context) => MissionsList()),
+    ChangeNotifierProxyProvider(
+      create: (context) => ProfileModel(),
+      update: (context,_,profile) {
+        if(profile == null) throw ArgumentError.notNull('profile');
+        return profile;
+      }
+    )
+  ],
+  child: const MyApp()
   ));
 }
 
