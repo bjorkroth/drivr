@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:provider/provider.dart';
 import '../models/profile_model.dart';
-import 'drivr_app_bar.dart';
-import 'drivr_bottom_bar.dart';
+import '../widgets/drivr_app_bar.dart';
+import '../widgets/drivr_bottom_bar.dart';
 
 @JsonSerializable()
 class FormData{
@@ -16,20 +16,23 @@ class FormData{
     this.passphrase,
   });
 }
-class Login extends StatefulWidget {
-  const Login({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override 
-  State<Login> createState() => _Login();
+  State<LoginScreen> createState() => _Login();
 }
 
-class _Login extends State<Login>{
+class _Login extends State<LoginScreen>{
   FormData formData = FormData();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DrivrAppBar(preferredSize: const Size.fromHeight(80.0), child: Container(),),
+      appBar: DrivrAppBar(
+        title: 'Login',
+        preferredSize: const Size.fromHeight(80.0),
+        child: Container(),),
       body: Form(
         child: Scrollbar(
           child: Column(children: [

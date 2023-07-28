@@ -3,10 +3,10 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'models/profile_model.dart';
 import 'data/missionList.dart';
-import 'widgets/profile.dart';
-import 'widgets/login.dart';
-import 'widgets/missions.dart';
-import 'widgets/shop.dart';
+import 'screens/profile_screen.dart';
+import 'screens/login_screen.dart';
+import 'screens/missions_screen.dart';
+import 'screens/shop_screen.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -27,36 +27,36 @@ final GoRouter _goRouter = GoRouter(routes: <RouteBase>[
   GoRoute(
     path: '/',
     builder: (BuildContext context, GoRouterState state) {
-      return const Login();
+      return const LoginScreen();
     },
   ),
   GoRoute(
     path: '/profile',
     builder: (BuildContext context, GoRouterState state) {
-      return const Profile();
+      return const ProfileScreen();
     },
   ),
   GoRoute(
     path: '/missions',
     builder: (BuildContext context, GoRouterState state) {
-      return const Missions();
+      return const MissionsScreen();
     },
   ),
   GoRoute(
     path: '/shop',
     builder: (BuildContext context, GoRouterState state) {
-      return const Shop();
+      return const ShopScreen();
     },
   ),
   GoRoute(
       path: '/login',
       builder: (BuildContext context, GoRouterState state) {
-        return const Login();
+        return const LoginScreen();
       }),
   GoRoute(
       path: '/home',
       builder: (BuildContext context, GoRouterState state) {
-        return const Login();
+        return const LoginScreen();
       })
 ]);
 

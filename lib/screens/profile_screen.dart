@@ -1,16 +1,17 @@
 import '../models/profile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'drivr_app_bar.dart';
-import 'drivr_bottom_bar.dart';
+import '../widgets/drivr_app_bar.dart';
+import '../widgets/drivr_bottom_bar.dart';
 
-class Profile extends StatelessWidget{
-  const Profile({super.key});
+class ProfileScreen extends StatelessWidget{
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold (
         appBar: DrivrAppBar(
+            title: 'Profile',
             preferredSize: const Size.fromHeight(80.0),
             child: Container()),
         body: Center(

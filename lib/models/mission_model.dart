@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-@immutable
 class MissionModel{
   final int id;
   final String name;
   final int level;
   final bool accomplished;
   final Color color;
+  late String description;
+  late double experienceEarned;
 
   MissionModel(this.id, this.name, this.level, this.accomplished) :
         color = Colors.primaries[id % Colors.primaries.length];

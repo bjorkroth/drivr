@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
+import 'login_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -25,7 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return const Scaffold(
       body: Center(
         child: Expanded(
-            child: Login()
+            child: LoginScreen()
         ),
       ),
     );
