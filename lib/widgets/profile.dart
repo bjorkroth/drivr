@@ -30,7 +30,7 @@ class Profile extends StatelessWidget{
             ],
           )
         ),
-      bottomNavigationBar: const DrivrBottomBar(),
+      bottomNavigationBar: DrivrBottomBar(menuBarSelectedItem: 3),
     );
   }
 }

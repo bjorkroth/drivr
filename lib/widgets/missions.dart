@@ -23,7 +23,7 @@ class Missions extends StatelessWidget{
                   SliverList(delegate: SliverChildBuilderDelegate(
                           (context, index) => MissionListItem(index), childCount: numberOfMissions))
                 ],),
-        bottomNavigationBar: const DrivrBottomBar(),
+        bottomNavigationBar: DrivrBottomBar(menuBarSelectedItem: 1),
     );
   }
 }

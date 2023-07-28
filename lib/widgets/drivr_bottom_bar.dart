@@ -2,33 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class DrivrBottomBar extends StatelessWidget{
-  const DrivrBottomBar({super.key});
+  DrivrBottomBar({super.key, required this.menuBarSelectedItem});
 
-  final int _selectedIndex = 0;
+  final int menuBarSelectedItem;
 
   @override
   Widget build(BuildContext context) {
     final List<String> pageUrls = [
       '/home',
       '/missions',
+      '/shop',
       '/profile'
     ];
 
     void onItemTapped(int index){
+      debugPrint('bottom bar index is now $menuBarSelectedItem');
       context.go(pageUrls[index]);
     }
 
     return Stack(
       children: <Widget>[
         BottomNavigationBar(
-            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            selectedItemColor: Colors.white60,
-            currentIndex: _selectedIndex,
+            type: BottomNavigationBarType.shifting,
+            showSelectedLabels: true,
+            selectedItemColor: Colors.white70,
+            currentIndex: menuBarSelectedItem,
             onTap: onItemTapped,
-            items: const<BottomNavigationBarItem>[
-              BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-              BottomNavigationBarItem(icon: Icon(Icons.games_outlined), label: 'Missions'),
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                  icon: const Icon(Icons.home_filled),
+                  label: 'Home',
+                  backgroundColor: Theme.of(context).colorScheme.inversePrimary),
+              BottomNavigationBarItem(
+                  icon: const Icon(Icons.games_outlined),
+                  label: 'Missions',
+                  backgroundColor: Theme.of(context).colorScheme.inversePrimary),
+              BottomNavigationBarItem(
+                  icon: const Icon(Icons.shop_2_outlined),
+                  label: 'Shop',
+                  backgroundColor: Theme.of(context).colorScheme.inversePrimary),
+              BottomNavigationBarItem(
+                  icon: const Icon(Icons.person),
+                  label: 'Profile',
+                  backgroundColor: Theme.of(context).colorScheme.inversePrimary),
             ]
         ),
       ],

@@ -1,11 +1,12 @@
-import 'package:drivr/data/missionList.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'models/profile_model.dart';
+import 'data/missionList.dart';
 import 'widgets/profile.dart';
 import 'widgets/login.dart';
 import 'widgets/missions.dart';
+import 'widgets/shop.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -39,6 +40,12 @@ final GoRouter _goRouter = GoRouter(routes: <RouteBase>[
     path: '/missions',
     builder: (BuildContext context, GoRouterState state) {
       return const Missions();
+    },
+  ),
+  GoRoute(
+    path: '/shop',
+    builder: (BuildContext context, GoRouterState state) {
+      return const Shop();
     },
   ),
   GoRoute(

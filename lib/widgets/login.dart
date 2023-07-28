@@ -72,7 +72,7 @@ class _Login extends State<Login>{
           ])
           )
       ),
-      bottomNavigationBar: const DrivrBottomBar(),
+      bottomNavigationBar: DrivrBottomBar(menuBarSelectedItem: 0),
     );
   }
 }
