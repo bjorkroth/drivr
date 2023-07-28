@@ -13,4 +13,6 @@ class MissionsList {
   MissionModel getByPosition(int position){
     return getById(position);
   }
+
+  int getNumberOfMissions() => missions.length;
 }

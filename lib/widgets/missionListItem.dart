@@ -1,4 +1,4 @@
-import '../data/missionlist.dart';
+import '../data/missionList.dart';
 import '../models/mission_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +10,8 @@ class MissionListItem extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
+    debugPrint('index $index');
+
     var item = context.select<MissionsList, MissionModel>(
         (missions) => missions.getByPosition(index),
     );
