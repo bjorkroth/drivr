@@ -10,13 +10,9 @@ class MissionListItem extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    debugPrint('index $index');
-
     var item = context.select<MissionsList, MissionModel>(
         (missions) => missions.getByPosition(index),
     );
-
-    debugPrint(item.name);
 
     var textTheme = Theme.of(context).textTheme.titleLarge;
 

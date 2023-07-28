@@ -12,7 +12,6 @@ class Missions extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     var numberOfMissions = context.read<MissionsList>().getNumberOfMissions();
-    debugPrint('number of missions: $numberOfMissions');
 
     return Scaffold (
       appBar: DrivrAppBar(
