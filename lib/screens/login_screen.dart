@@ -58,22 +58,22 @@ class _Login extends State<LoginScreen>{
                 formData.passphrase = value;
               },
             ),
-            TextButton(
-            onPressed: () {
-              var profileModel = context.read<ProfileModel>();
+            ElevatedButton(
+                onPressed: () {
+                  var profileModel = context.read<ProfileModel>();
 
-              if(formData.name!.isEmpty){
-                return;
-              }
+                  if(formData.name!.isEmpty){
+                    return;
+                  }
 
-              profileModel.setName(formData.name ?? "");
-              profileModel.logInUser();
+                  profileModel.setName(formData.name ?? "");
+                  profileModel.logInUser();
 
-              context.go('/profile');
-            }, 
-            child: const Text('Sign in'))
+                  context.go('/profile');
+                },
+              child: const Text('Sign in'))
           ])
-          )
+          ),
       ),
       bottomNavigationBar: DrivrBottomBar(menuBarSelectedItem: 0),
     );
