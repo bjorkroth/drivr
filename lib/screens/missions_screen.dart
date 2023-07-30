@@ -1,6 +1,7 @@
 import 'package:drivr/data/missionList.dart';
 import 'package:provider/provider.dart';
 
+import '../models/profile_model.dart';
 import '../widgets/drivr_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import '../widgets/drivr_app_bar.dart';
@@ -11,7 +12,8 @@ class MissionsScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    var numberOfMissions = context.read<MissionsList>().getNumberOfMissions();
+    var playerLevel = context.read<ProfileModel>().currentLevel;
+    var numberOfMissions = context.read<MissionsList>().getNumberOfMissionsForCurrentPlayerLevel(playerLevel);
 
     return Scaffold (
       appBar: DrivrAppBar(

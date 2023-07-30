@@ -23,7 +23,12 @@ class ProfileScreen extends StatelessWidget{
               ),
               Consumer<ProfileModel>(builder: (context,profile,child){
                 if(profile.isLoggedIn){
-                  return Text('Profile name ${profile.name}', style: const TextStyle(fontWeight: FontWeight.bold));
+                  return Column(
+                    children: [
+                      Text('Profile name ${profile.name}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                      Text('Current level: ${profile.currentLevel}')
+                    ],
+                  );
                 }
                 return const Column(children: [ Text('User is not logged in', style: TextStyle(fontWeight: FontWeight.bold))]);
               }),

@@ -7,6 +7,8 @@ class ProfileModel extends ChangeNotifier {
   bool _isLoggedin = false;
   bool get isLoggedIn => _isLoggedin;
 
+  int get currentLevel => 2;
+
   void setName(String name){
     _name = name;
     notifyListeners();

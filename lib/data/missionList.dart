@@ -6,6 +6,9 @@ class MissionsList {
     MissionModel(1,'Second mission', 1, false),
     MissionModel(2,'Third mission', 1, false),
     MissionModel(3,'Fourth mission', 2, false),
+    MissionModel(3,'Fifth mission', 3, false),
+    MissionModel(3,'Sixth mission', 4, false),
+    MissionModel(3,'Seventh mission', 5, false),
   ];
 
   MissionModel getById(int id) => missions.firstWhere((mission) => mission.id == id);
@@ -15,4 +18,6 @@ class MissionsList {
   }
 
   int getNumberOfMissions() => missions.length;
+
+  int getNumberOfMissionsForCurrentPlayerLevel(int userLevel) => missions.where((mission) => userLevel >= mission.level).length;
 }
