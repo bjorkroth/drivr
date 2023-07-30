@@ -26,7 +26,8 @@ class ProfileScreen extends StatelessWidget{
                   return Column(
                     children: [
                       Text('Profile name ${profile.name}', style: const TextStyle(fontWeight: FontWeight.bold)),
-                      Text('Current level: ${profile.currentLevel}')
+                      Text('Current level: ${profile.currentLevel}'),
+                      Text('Current XP: ${profile.experience} XP')
                     ],
                   );
                 }
