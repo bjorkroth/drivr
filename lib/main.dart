@@ -1,3 +1,4 @@
+import 'package:drivr/screens/mission_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +11,13 @@ import 'screens/shop_screen.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
-    Provider(create: (context) => MissionsList()),
+    ChangeNotifierProxyProvider(
+        create: (context) => MissionsList(),
+        update: (context,_,missions){
+          if(missions == null) throw ArgumentError.notNull('missions_list');
+          return missions;
+        },
+    ),
     ChangeNotifierProxyProvider(
       create: (context) => ProfileModel(),
       update: (context,_,profile) {
@@ -40,6 +47,12 @@ final GoRouter _goRouter = GoRouter(routes: <RouteBase>[
     path: '/missions',
     builder: (BuildContext context, GoRouterState state) {
       return const MissionsScreen();
+    },
+  ),
+  GoRoute(
+    path: '/missions/:missionId',
+    builder: (BuildContext context, GoRouterState state) {
+      return MissionDetailsScreen(currentMissionId: int.parse(state.pathParameters['missionId'] ?? ""));
     },
   ),
   GoRoute(

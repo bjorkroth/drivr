@@ -3,13 +3,13 @@ class MissionModel{
   final int id;
   final String name;
   final int level;
-  final bool accomplished;
+  late bool accomplished;
   final Color color;
-  late String description;
-  late double experienceEarned;
+  final String description;
+  final double experienceEarned;
 
-  MissionModel(this.id, this.name, this.level, this.accomplished) :
-        color = Colors.primaries[id % Colors.primaries.length];
+  MissionModel(this.id, this.name, this.level, this.accomplished, this.description, this.experienceEarned) :
+        color = Colors.primaries[level % Colors.primaries.length];
 
   @override
   int get hashCode => id;

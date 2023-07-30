@@ -1,8 +1,9 @@
-import 'package:drivr/models/profile_model.dart';
-import '../data/missionList.dart';
-import '../models/mission_model.dart';
+import 'package:drivr/extenders/mission_list_item_extenders.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../data/missionList.dart';
+import '../models/mission_model.dart';
+import '../models/profile_model.dart';
 
 class MissionListItem extends StatelessWidget{
   final int index;
@@ -17,24 +18,8 @@ class MissionListItem extends StatelessWidget{
         (missions) => missions.getByPosition(index),
     );
 
-    var textTheme = Theme.of(context).textTheme.titleLarge;
-    var actionButtonTextAvailable = const Text('Do it');
-    var actionButton = TextButton(
-      onPressed: () {  },
-      child: actionButtonTextAvailable);
-    var unAvailableButtonStyle = const TextStyle(color: Colors.grey);
-    var unAvailableStyle = const TextStyle(color: Colors.grey, fontSize: 20);
-    var actionButtonTextNotAvailable = Text('Not available', style: unAvailableButtonStyle);
-
-    late Widget action;
-    late TextStyle titleTextStyle;
-    if(playerLevel >= item.level){
-      action = actionButton;
-      titleTextStyle = textTheme ?? unAvailableStyle;
-    } else{
-      action = actionButtonTextNotAvailable;
-      titleTextStyle = unAvailableStyle;
-    }
+    var action = MissionListItemExtenders().getActionButton(item, context, playerLevel);
+    var titleTextStyle = MissionListItemExtenders().getListItemTextStyle(item, context, playerLevel);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -46,7 +31,7 @@ class MissionListItem extends StatelessWidget{
               aspectRatio: 1,
               child: Container(
                 color: item.color,
-                child: Text('Level ${item.level.toString()}'),
+                child: Center(child: Text(item.level.toString())),
               ),
             ),
             const SizedBox(width: 24),
