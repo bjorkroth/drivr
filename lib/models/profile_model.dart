@@ -7,7 +7,7 @@ class ProfileModel extends ChangeNotifier {
   bool _isLoggedin = false;
   bool get isLoggedIn => _isLoggedin;
 
-  int get currentLevel => 2;
+  int currentLevel = 1;
   double experience = 0;
 
   void setName(String name){
@@ -27,6 +27,25 @@ class ProfileModel extends ChangeNotifier {
 
   void updateExperience(double amount){
     experience += amount;
+    updateUserLevel();
     notifyListeners();
+  }
+
+  updateUserLevel(){
+    if(experience > 35){
+      currentLevel = 2;
+    }
+
+    if(currentLevel > 100){
+      currentLevel = 3;
+    }
+
+    if(currentLevel > 250){
+      currentLevel = 4;
+    }
+
+    if(currentLevel > 600){
+      currentLevel = 5;
+    }
   }
 }
