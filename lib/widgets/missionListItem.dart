@@ -24,23 +24,28 @@ class MissionListItem extends StatelessWidget{
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: LimitedBox(
-        maxHeight: 50,
+        maxHeight: 65,
         child: Row(
           children: [
-            AspectRatio(
-              aspectRatio: 1,
-              child: Container(
-                color: item.color,
-                child: Center(child: Text(item.level.toString())),
-              ),
-            ),
-            const SizedBox(width: 24),
-            Expanded(child:
-                Text(
-                  item.name, style: titleTextStyle,
+            //AspectRatio(
+            //  aspectRatio: 1,
+            //  child: Container(
+            //    color: item.color,
+            //    child: Center(child: Text(item.level.toString())),
+            //  ),
+            //),
+            //const SizedBox(width: 24),
+              Expanded(child: Column(children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(item.name, style: titleTextStyle,),
                 ),
-            ),
-          const SizedBox(width: 24),
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Nivå ${item.level} -  ${item.description}'))
+              ],)
+              ),
+            const SizedBox(width: 24),
             action
           ],
         ),

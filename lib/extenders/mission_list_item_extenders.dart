@@ -9,7 +9,7 @@ class MissionListItemExtenders {
         color: Colors.grey, fontSize: 20, fontStyle: FontStyle.italic);
     var accomplishedStyle = const TextStyle(
         color: Colors.grey, fontSize: 20, decoration: TextDecoration.lineThrough);
-    var regularStyle = const TextStyle(color: Colors.black, fontSize: 20);
+    var regularStyle = const TextStyle(color: Colors.black, fontSize: 16);
 
     if (item.level > playerLevel) {
       return unAvailableStyle;
@@ -19,7 +19,7 @@ class MissionListItemExtenders {
       return accomplishedStyle;
     }
 
-    return Theme.of(context).textTheme.titleLarge ?? regularStyle;
+    return regularStyle;
   }
 
   Widget getActionButton (MissionModel item, BuildContext context, int playerLevel){
