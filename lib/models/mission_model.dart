@@ -6,10 +6,21 @@ class MissionModel{
   late bool accomplished;
   final Color color;
   final String description;
-  final double experienceEarned;
+  final int experienceEarned;
 
   MissionModel(this.id, this.name, this.level, this.accomplished, this.description, this.experienceEarned) :
         color = Colors.primaries[level % Colors.primaries.length];
+
+  factory MissionModel.fromJson(Map<String,dynamic> data){
+    final int id = data['id'];
+    final String name = data['name'];
+    final int level = data['level'];
+    late bool accomplished = data['accomplished'];
+    final String description = data['description'];
+    final int experienceEarned = data['experienceEarned'];
+
+    return MissionModel(id, name, level, accomplished, description, experienceEarned);
+  }
 
   @override
   int get hashCode => id;

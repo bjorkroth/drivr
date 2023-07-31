@@ -12,7 +12,10 @@ import 'screens/shop_screen.dart';
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProxyProvider(
-        create: (context) => MissionsList(),
+        create: (context) {
+          var missionList = MissionsList();
+          return missionList;
+        },
         update: (context,_,missions){
           if(missions == null) throw ArgumentError.notNull('missions_list');
           return missions;

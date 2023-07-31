@@ -1,17 +1,23 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../models/mission_model.dart';
 
 class MissionsList extends ChangeNotifier {
-  static List<MissionModel> missions = [
-    MissionModel(0,'First mission', 1, false, 'Mission Description', 20),
-    MissionModel(1,'Second mission', 1, false, 'Mission Description', 20),
-    MissionModel(2,'Third mission', 1, false, 'Mission Description', 25),
-    MissionModel(3,'Fourth mission', 2, false, 'Mission Description', 25),
-    MissionModel(4,'Fifth mission', 3, false, 'Mission Description', 20),
-    MissionModel(5,'Sixth mission', 4, false, 'Mission Description', 25),
-    MissionModel(6,'Seventh mission', 5, false, 'Mission Description', 30),
-  ];
+  List<MissionModel> missions = [];
+
+  Future<void> loadMissions() async {
+    final response = await rootBundle.loadString('assets/missions.json');
+    List<dynamic> data = await json.decode(response);
+    
+    for (var element in data) {
+      missions.add(MissionModel.fromJson(element));
+    }
+
+    notifyListeners();
+  }
 
   MissionModel getById(int id) => missions.firstWhere((mission) => mission.id == id);
 

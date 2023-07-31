@@ -8,7 +8,7 @@ class ProfileModel extends ChangeNotifier {
   bool get isLoggedIn => _isLoggedin;
 
   int currentLevel = 1;
-  double experience = 0;
+  int experience = 0;
 
   void setName(String name){
     _name = name;
@@ -25,7 +25,7 @@ class ProfileModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateExperience(double amount){
+  void updateExperience(int amount){
     experience += amount;
     updateUserLevel();
     notifyListeners();

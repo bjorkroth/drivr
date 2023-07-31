@@ -11,8 +11,14 @@ class MissionsScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    var missionContext = context.watch<MissionsList>();
+
+    if(missionContext.missions.isEmpty){
+      missionContext.loadMissions();
+    }
+
     var playerLevel = context.read<ProfileModel>().currentLevel;
-    var numberOfMissions = context.read<MissionsList>().getNumberOfMissionsForCurrentPlayerLevel(playerLevel);
+    var numberOfMissions = missionContext.getNumberOfMissionsForCurrentPlayerLevel(playerLevel);
 
     return Scaffold (
       appBar: DrivrAppBar(
