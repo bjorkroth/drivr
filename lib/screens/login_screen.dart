@@ -1,7 +1,9 @@
+
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:provider/provider.dart';
+import '../auth/auth_provider.dart';
 import '../models/profile_model.dart';
 import '../widgets/drivr_app_bar.dart';
 import '../widgets/drivr_bottom_bar.dart';
@@ -61,13 +63,14 @@ class _Login extends State<LoginScreen>{
             ElevatedButton(
                 onPressed: () {
                   var profileModel = context.read<ProfileModel>();
+                  var authProvider = context.read<AuthProvider>();
 
                   if(formData.name!.isEmpty){
                     return;
                   }
 
                   profileModel.setName(formData.name ?? "");
-                  profileModel.logInUser();
+                  authProvider.logInUser(formData.name ?? "");
 
                   context.go('/profile');
                 },

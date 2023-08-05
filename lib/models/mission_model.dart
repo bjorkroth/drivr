@@ -27,4 +27,15 @@ class MissionModel{
 
   @override
   bool operator ==(Object other) => other is MissionModel && other.id == id;
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+    'id': id,
+    'name': name,
+    'level': level,
+    'accomplished': accomplished,
+    'description': description,
+    'experienceEarned': experienceEarned,
+    };
+  }
 }

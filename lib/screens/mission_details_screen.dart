@@ -19,10 +19,16 @@ class MissionDetailsScreen extends StatelessWidget {
     var profileContext = context.watch<ProfileModel>();
     var currentMission = missionContext.getById(currentMissionId);
 
-    void markAsAccomplished(){
-      missionContext.accomplishMission(currentMission.id);
-      profileContext.updateExperience(currentMission.experienceEarned);
+    void navigateToMissionPage(){
       context.go('/missions');
+    }
+
+    void markAsAccomplished() async{
+      missionContext.accomplishMission(currentMission.id);
+      await missionContext.accomplishMissionAsync(currentMission.id);
+      profileContext.updateExperience(currentMission.experienceEarned);
+
+      navigateToMissionPage();
     }
 
     return Scaffold(

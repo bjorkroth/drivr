@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
-import '../models/profile_model.dart';
+import '../auth/auth_provider.dart';
 
 class DrivrBottomBar extends StatelessWidget{
   DrivrBottomBar({super.key, required this.menuBarSelectedItem});
@@ -11,7 +10,7 @@ class DrivrBottomBar extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    var playerIsLoggedIn = context.read<ProfileModel>().isLoggedIn;
+    bool playerIsLoggedIn = context.read<AuthProvider>().isLoggedIn;
 
     final List<String> pageUrls = [
       '/home',

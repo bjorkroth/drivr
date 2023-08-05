@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'login_screen.dart';
+
+import '../widgets/drivr_app_bar.dart';
+import '../widgets/drivr_bottom_bar.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -22,12 +24,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Expanded(
-            child: LoginScreen()
-        ),
+    return Scaffold (
+      appBar: DrivrAppBar(
+          title: 'Home',
+          preferredSize: const Size.fromHeight(80.0),
+          child: Container()),
+      body: const Center(
+          child: Text('Home page')
       ),
+      bottomNavigationBar: DrivrBottomBar(menuBarSelectedItem: 0),
     );
   }
 }
