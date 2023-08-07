@@ -1,3 +1,4 @@
+import 'package:drivr/data/create_local_mission_file.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '../models/profile_model.dart';
@@ -17,7 +18,7 @@ class _MissionScreen extends State<MissionsScreen>{
   @override
   void initState() {
     super.initState();
-    //_loadCounter();
+    CreateLocalMissionFile().createLocalFileIfNotExist();
   }
 
   @override
