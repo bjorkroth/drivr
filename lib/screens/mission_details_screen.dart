@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 import '../data/missionList.dart';
-import '../models/profile_model.dart';
+import '../models/progress_model.dart';
 import '../widgets/drivr_bottom_bar.dart';
 import '../widgets/drivr_app_bar.dart';
 import '../widgets/drivr_drawer_menu.dart';
@@ -17,7 +17,7 @@ class MissionDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var missionContext = context.watch<MissionsList>();
-    var profileContext = context.watch<ProfileModel>();
+    var progressContext = context.watch<ProgressModel>();
     var currentMission = missionContext.getById(currentMissionId);
 
     void navigateToMissionPage(){
@@ -27,7 +27,7 @@ class MissionDetailsScreen extends StatelessWidget {
     void markAsAccomplished() async{
       missionContext.accomplishMission(currentMission.id);
       await missionContext.accomplishMissionAsync(currentMission.id);
-      await profileContext.saveExperience(currentMission.experienceEarned);
+      await progressContext.saveExperience(currentMission.experienceEarned);
 
       navigateToMissionPage();
     }

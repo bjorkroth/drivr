@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../data/missionList.dart';
 import '../models/mission_model.dart';
-import '../models/profile_model.dart';
+import '../models/progress_model.dart';
 
 class MissionListItem extends StatelessWidget{
   final int index;
@@ -12,7 +12,7 @@ class MissionListItem extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    var playerLevel = context.read<ProfileModel>().currentLevel;
+    var playerLevel = context.read<ProgressModel>().currentLevel;
 
     var item = context.select<MissionsList, MissionModel>(
         (missions) => missions.getByPosition(index),

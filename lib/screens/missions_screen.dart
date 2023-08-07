@@ -1,6 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import '../models/profile_model.dart';
+import '../models/progress_model.dart';
 import '../widgets/drivr_bottom_bar.dart';
 import '../data/missionList.dart';
 import '../widgets/drivr_app_bar.dart';
@@ -28,7 +28,7 @@ class _MissionScreen extends State<MissionsScreen>{
       missionContext.loadMissions();
     }
 
-    var playerLevel = context.read<ProfileModel>().currentLevel;
+    var playerLevel = context.read<ProgressModel>().currentLevel;
     var numberOfMissions = missionContext.getNumberOfMissionsForCurrentPlayerLevel(playerLevel);
 
     return Scaffold (

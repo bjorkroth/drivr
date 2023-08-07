@@ -11,13 +11,7 @@ class MissionsList extends ChangeNotifier {
   List<MissionModel> missions = [];
 
   Future<void> loadMissions() async {
-    final response = await rootBundle.loadString('assets/missions.json');
-    List<dynamic> data = await json.decode(response);
-    
-    for (var element in data) {
-      missions.add(MissionModel.fromJson(element));
-    }
-
+    missions = await MissionStorage().readMissions();
     notifyListeners();
   }
 
@@ -44,8 +38,6 @@ class MissionsList extends ChangeNotifier {
     updateSaveFile().then((value) => {
       notifyListeners()
     });
-
-    //notifyListeners();
   }
 
   Future<void> updateSaveFile() async{

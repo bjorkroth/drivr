@@ -1,58 +1,28 @@
-import '../data/profile_storage.dart';
-import '../extenders/get_user_level_for_experiencepoints.dart';
 import 'package:flutter/widgets.dart';
+
+import '../data/profile_persistance.dart';
 
 class ProfileModel extends ChangeNotifier {
   String id = "";
-
   String name = "";
 
-  int currentLevel = 1;
-  late int experience = getExperience();
+  final ProfilePersistence _store;
 
-  ProfileModel();
+  ProfileModel(ProfilePersistence store) : _store = store;
 
-  ProfileModel.create(this.id, this.name, this.experience, this.currentLevel);
+  Future<void> getLatestFromStore() async{
+    final storeName = await _store.getName();
+    name = storeName;
 
-  int getExperience(){
-    ProfileStorage().getExperience().then((value) => experience = value);
-    return experience;
+    final storeId = await _store.getId();
+    id = storeId;
+
+    notifyListeners();
   }
 
   Future<void> setName(String name) async{
     name = name;
-    await ProfileStorage().setName(name);
+    await _store.setName(name);
     notifyListeners();
-  }
-
-  Future<void> saveExperience(int amount) async{
-    experience += amount;
-    await ProfileStorage().updateExperience(amount);
-    await updateUserLevel();
-    notifyListeners();
-  }
-
-  Future<void> updateUserLevel() async{
-    var userLevel  = GetUserLevelForExperiencePoints().getLevel(experience);
-    await ProfileStorage().updateLevel(userLevel);
-    currentLevel = userLevel;
-  }
-
-  factory ProfileModel.fromJson(Map<String,dynamic> data){
-    final String id = data['id'];
-    final String name = data['name'];
-    final int level = data['level'];
-    final int experience = data['experience'];
-
-    return ProfileModel.create(id, name, experience, level);
-  }
-
-  Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      'id': id,
-      'name': name,
-      'level': currentLevel,
-      'experience': experience,
-    };
   }
 }
