@@ -26,7 +26,7 @@ class MissionDetailsScreen extends StatelessWidget {
     void markAsAccomplished() async{
       missionContext.accomplishMission(currentMission.id);
       await missionContext.accomplishMissionAsync(currentMission.id);
-      profileContext.updateExperience(currentMission.experienceEarned);
+      await profileContext.saveExperience(currentMission.experienceEarned);
 
       navigateToMissionPage();
     }

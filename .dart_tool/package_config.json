@@ -159,7 +159,7 @@
     },
     {
       "name": "path_provider_linux",
-      "rootUri": "file:///Users/bjoerken/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.11",
+      "rootUri": "file:///Users/bjoerken/.pub-cache/hosted/pub.dev/path_provider_linux-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -171,7 +171,7 @@
     },
     {
       "name": "path_provider_windows",
-      "rootUri": "file:///Users/bjoerken/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.7",
+      "rootUri": "file:///Users/bjoerken/.pub-cache/hosted/pub.dev/path_provider_windows-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -302,7 +302,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-08-05T22:45:29.871896Z",
+  "generated": "2023-08-07T03:14:45.682043Z",
   "generator": "pub",
   "generatorVersion": "3.0.5"
 }
