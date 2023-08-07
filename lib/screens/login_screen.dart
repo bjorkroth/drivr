@@ -1,4 +1,3 @@
-
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -30,6 +29,25 @@ class _Login extends State<LoginScreen>{
 
   @override
   Widget build(BuildContext context) {
+
+    void navigateToProfilePage(){
+      context.go('/profile');
+    }
+
+    void login() async{
+      var profileModel = context.read<ProfileModel>();
+      var authProvider = context.read<AuthProvider>();
+
+      if(formData.name!.isEmpty){
+        return;
+      }
+
+      await profileModel.setName(formData.name ?? "");
+      await authProvider.logInUser(formData.name ?? "");
+
+      navigateToProfilePage();
+    }
+
     return Scaffold(
       appBar: DrivrAppBar(
         title: 'Login',
@@ -61,19 +79,7 @@ class _Login extends State<LoginScreen>{
               },
             ),
             ElevatedButton(
-                onPressed: () {
-                  var profileModel = context.read<ProfileModel>();
-                  var authProvider = context.read<AuthProvider>();
-
-                  if(formData.name!.isEmpty){
-                    return;
-                  }
-
-                  profileModel.setName(formData.name ?? "");
-                  authProvider.logInUser(formData.name ?? "");
-
-                  context.go('/profile');
-                },
+                onPressed: login,
               child: const Text('Sign in'))
           ])
           ),

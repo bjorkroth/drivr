@@ -56,7 +56,9 @@ class MyApp extends StatelessWidget {
     GoRoute(
       path: '/profile',
       builder: (BuildContext context, GoRouterState state) {
-        if(!context.read<AuthProvider>().isLoggedIn) return const LoginScreen();
+        if(!context.read<AuthProvider>().isLoggedIn){
+          return const LoginScreen();
+        }
         return const ProfileScreen();
       },
     ),
