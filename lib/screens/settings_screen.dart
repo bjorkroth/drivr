@@ -3,14 +3,14 @@ import '../widgets/drivr_app_bar.dart';
 import '../widgets/drivr_bottom_bar.dart';
 import '../widgets/drivr_drawer_menu.dart';
 
-class ShopScreen extends StatelessWidget{
-  const ShopScreen({super.key});
+class SettingsScreen extends StatelessWidget{
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold (
       appBar: DrivrAppBar(
-          title: 'Shop',
+          title: 'Settings',
           preferredSize: const Size.fromHeight(80.0),
           child: Container()),
       drawer: const DrivrDrawerMenu(),
@@ -18,7 +18,7 @@ class ShopScreen extends StatelessWidget{
           child: Column(
             children: [
               Icon(
-                Icons.shop_outlined,
+                Icons.settings,
                 size: 150,
               ),
               // }),

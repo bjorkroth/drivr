@@ -1,3 +1,4 @@
+import 'package:drivr/widgets/drivr_drawer_menu.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/drivr_app_bar.dart';
@@ -29,6 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
           title: 'Home',
           preferredSize: const Size.fromHeight(80.0),
           child: Container()),
+      drawer: const DrivrDrawerMenu(),
       body: const Center(
           child: Text('Home page')
       ),

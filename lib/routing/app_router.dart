@@ -1,3 +1,4 @@
+import 'package:drivr/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -60,8 +61,17 @@ class AppRouter {
       },
     ),
     GoRoute(
+      path: '/settings',
+      builder: (BuildContext context, GoRouterState state) {
+        return const SettingsScreen();
+      },
+    ),
+    GoRoute(
         path: '/login',
         builder: (BuildContext context, GoRouterState state) {
+          if (context.read<AuthProvider>().isLoggedIn) {
+            return const MyHomePage(title: 'driver');
+          }
           return const LoginScreen();
         }),
     GoRoute(

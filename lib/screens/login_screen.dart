@@ -6,6 +6,7 @@ import '../auth/auth_provider.dart';
 import '../models/profile_model.dart';
 import '../widgets/drivr_app_bar.dart';
 import '../widgets/drivr_bottom_bar.dart';
+import '../widgets/drivr_drawer_menu.dart';
 
 @JsonSerializable()
 class FormData{
@@ -53,6 +54,7 @@ class _Login extends State<LoginScreen>{
         title: 'Login',
         preferredSize: const Size.fromHeight(80.0),
         child: Container(),),
+      drawer: const DrivrDrawerMenu(),
       body: Form(
         child: Scrollbar(
           child: Column(children: [

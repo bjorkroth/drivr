@@ -13,11 +13,11 @@ class DrivrAppBar extends PreferredSize{
     return Stack(
       children: <Widget>[
         AppBar(
-          leading: const IconButton(
-            icon: Icon(Icons.menu),
-            tooltip: 'Navigation menu',
-            onPressed: null,
-          ),
+          //leading: const IconButton(
+            //icon: Icon(Icons.settings),
+            //tooltip: 'Navigation menu',
+            //onPressed: null,
+          //),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Text(title),
         )

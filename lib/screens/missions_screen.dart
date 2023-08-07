@@ -4,6 +4,7 @@ import '../models/profile_model.dart';
 import '../widgets/drivr_bottom_bar.dart';
 import '../data/missionList.dart';
 import '../widgets/drivr_app_bar.dart';
+import '../widgets/drivr_drawer_menu.dart';
 import '../widgets/missionListItem.dart';
 
 class MissionsScreen extends StatefulWidget{
@@ -35,6 +36,7 @@ class _MissionScreen extends State<MissionsScreen>{
           title: 'Missions',
           preferredSize: const Size.fromHeight(80.0),
           child: Container()),
+      drawer: const DrivrDrawerMenu(),
       body:CustomScrollView(
         slivers: [
           const SliverToBoxAdapter(child: SizedBox(height: 4)),
