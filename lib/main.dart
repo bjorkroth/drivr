@@ -1,36 +1,14 @@
-import 'package:drivr/auth/auth_provider.dart';
-import 'package:drivr/initializers/initializer.dart';
-import 'package:drivr/routing/approuter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'models/profile_model.dart';
-import 'data/missionList.dart';
+
+import '../initializers/initializer.dart';
+import '../providers/app_provider.dart';
+import '../routing/app_router.dart';
 
 void main() async {
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProxyProvider(
-        create: (context) => AuthProvider(),
-        update: (context, _, auth) {
-          if (auth == null) throw ArgumentError.notNull('auth');
-          return auth;
-        }),
-    ChangeNotifierProxyProvider(
-      create: (context) {
-        var missionList = MissionsList();
-        return missionList;
-      },
-      update: (context, _, missions) {
-        if (missions == null) throw ArgumentError.notNull('missions_list');
-        return missions;
-      },
-    ),
-    ChangeNotifierProxyProvider(
-        create: (context) => ProfileModel(),
-        update: (context, _, profile) {
-          if (profile == null) throw ArgumentError.notNull('profile');
-          return profile;
-        })
-  ], child: MyApp()));
+  runApp(MultiProvider(
+      providers: AppProvider().providers,
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
