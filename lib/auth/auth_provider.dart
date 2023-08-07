@@ -8,22 +8,28 @@ class AuthProvider extends ChangeNotifier{
   String _currentUser = "";
   String get currentUser => _currentUser;
 
+  late SharedPreferences sharedPreferences;
+
+  AuthProvider(){
+    SharedPreferences.getInstance().then((SharedPreferences sp){
+      sharedPreferences = sp;
+      _isLoggedIn = sp.getBool('isLoggedIn') ?? false;
+    });
+  }
+
   Future<bool> isUserLoggedIn() async{
-    final prefs = await SharedPreferences.getInstance();
-    return Future.value(prefs.getBool('isLoggedIn'));
+    return sharedPreferences.getBool('isLoggedIn') ?? false;
   }
 
   Future<void> logInUser(String username) async{
     _currentUser = username;
     _isLoggedIn = true;
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isLoggedIn', true);
+    await sharedPreferences.setBool('isLoggedIn', true);
     notifyListeners();
   }
 
   Future<void> logOutUser() async{
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isLoggedIn', false);
+    await sharedPreferences.setBool('isLoggedIn', false);
     _currentUser = "";
     _isLoggedIn = false;
     notifyListeners();
