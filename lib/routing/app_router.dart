@@ -16,10 +16,19 @@ class AppRouter {
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        if (!context.read<AuthProvider>().isLoggedIn) {
-          return const LoginScreen();
-        }
-        return const MyHomePage(title: 'drivr');
+        var isLoggedInFuture = context.read<AuthProvider>().isUserLoggedIn();
+        return FutureBuilder(future: isLoggedInFuture,
+            builder: (context,snapshot){
+          if(snapshot.connectionState == ConnectionState.done){
+            if(snapshot.hasData){
+              if(snapshot.data == true){
+                return const HomeScreen(title: 'drivr');
+              }
+              return const LoginScreen();
+            }
+          }
+          return const CircularProgressIndicator();
+        });
       },
     ),
     GoRoute(
@@ -69,9 +78,6 @@ class AppRouter {
     GoRoute(
         path: '/login',
         builder: (BuildContext context, GoRouterState state) {
-          if (context.read<AuthProvider>().isLoggedIn) {
-            return const MyHomePage(title: 'driver');
-          }
           return const LoginScreen();
         }),
     GoRoute(
@@ -80,7 +86,7 @@ class AppRouter {
           if (!context.read<AuthProvider>().isLoggedIn) {
             return const LoginScreen();
           }
-          return const MyHomePage(title: 'drivr');
+          return const HomeScreen(title: 'drivr');
         })
   ]);
 }

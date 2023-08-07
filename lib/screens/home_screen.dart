@@ -1,11 +1,14 @@
 import 'package:drivr/widgets/drivr_drawer_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
+import '../auth/auth_provider.dart';
 import '../widgets/drivr_app_bar.dart';
 import '../widgets/drivr_bottom_bar.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -19,12 +22,17 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    var isLoggedIn = context.read<AuthProvider>().isLoggedIn;
+    if(!isLoggedIn){
+      context.go('/login');
+    }
+
     return Scaffold (
       appBar: DrivrAppBar(
           title: 'Home',
