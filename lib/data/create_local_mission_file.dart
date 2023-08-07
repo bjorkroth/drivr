@@ -30,7 +30,7 @@ class CreateLocalMissionFile {
     return missions;
   }
 
-  Future<void> createLocalFileIfNotExist() async{
+  Future<void> createLocalMissionFileIfNotExist() async{
     var filepath = await _localFile;
 
     if(await File(filepath).exists()){

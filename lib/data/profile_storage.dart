@@ -15,15 +15,6 @@ class ProfileStorage{
   Future<String> get _localFile async {
     final path = await _localPath;
     var filepath = '$path/profile_data.json';
-
-    if(await File(filepath).exists() == false) {
-      File(filepath).create();
-      var jsonMap = jsonEncode(
-          ProfileModel.create("temp", "temp", 0, 1).toJson()
-      );
-      await File(filepath).writeAsString(jsonMap, mode: FileMode.write);
-    }
-
     return filepath;
   }
 
@@ -32,7 +23,6 @@ class ProfileStorage{
       final filePath = await _localFile;
       var file = File(filePath);
       var contents = await file.readAsString();
-      //final contents = await rootBundle.loadString(filePath);
       Map<String,dynamic> data = await json.decode(contents);
       var profile = ProfileModel.fromJson(data);
 
