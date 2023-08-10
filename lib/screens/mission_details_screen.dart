@@ -1,3 +1,4 @@
+import 'package:drivr/widgets/mission_detail_icon_row_item.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -36,25 +37,10 @@ class MissionDetailsScreen extends StatelessWidget {
         child: const Text('Mark as accomplished'));
     var accomplishRowButton = ElevatedButton(
         onPressed: markAsAccomplished,
-        child: const Row(
-          children: [
-            Icon(
-              Icons.add,
-              size: 16,
-            ),
-            Text(' Accomplish')
-          ],
-        ));
-    var alreadyDoneText = const Text('Mission is already accomplished', style: TextStyle(fontStyle: FontStyle.italic),);
-    var doneIconRow = const Row(
-      children: [
-        Icon(
-              Icons.done,
-              size: 16,
-            ),
-            Text(' Done'),
-      ],
+        child: const MissionDetailIconRowItem(text: " Accomplish", icon: Icons.add, textColor: Colors.black)
     );
+    var alreadyDoneText = const Text('Mission is already accomplished', style: TextStyle(fontStyle: FontStyle.italic),);
+    var doneIconRow = const MissionDetailIconRowItem(text: " Done", icon: Icons.done, textColor: Colors.white);
     Widget actionButton;
     Widget doneOrActionRowButton;
 
@@ -98,24 +84,8 @@ class MissionDetailsScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.format_list_numbered_rounded,
-                      size: 16,
-                    ),
-                    Text('Level ${currentMission.level}'),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.grade,
-                      size: 16,
-                    ),
-                    Text('${currentMission.experienceEarned} XP'),
-                  ],
-                ),
+                MissionDetailIconRowItem(text: 'Level ${currentMission.level}', icon: Icons.format_list_numbered_rounded, textColor: Colors.white,),
+                MissionDetailIconRowItem(text: '${currentMission.experienceEarned} XP', icon: Icons.grade, textColor: Colors.white,),
                 doneOrActionRowButton
               ],
             ),
