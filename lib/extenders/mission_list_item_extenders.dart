@@ -4,18 +4,18 @@ import '../models/mission_model.dart';
 import 'package:flutter/material.dart';
 
 class MissionListItemExtenders {
-  TextStyle getListItemTextStyle(MissionModel item, BuildContext context, int playerLevel) {
+  TextStyle getListItemTextStyle(bool isAccomplished, int itemLevel, BuildContext context, int playerLevel) {
     var unAvailableStyle = const TextStyle(
         color: Colors.grey, fontSize: 20, fontStyle: FontStyle.italic);
     var accomplishedStyle = const TextStyle(
         color: Colors.grey, fontSize: 20, decoration: TextDecoration.lineThrough);
-    var regularStyle = const TextStyle(color: Colors.black, fontSize: 16);
+    var regularStyle = const TextStyle(color: Colors.black, fontSize: 20);
 
-    if (item.level > playerLevel) {
+    if (itemLevel > playerLevel) {
       return unAvailableStyle;
     }
 
-    if(item.accomplished){
+    if(isAccomplished){
       return accomplishedStyle;
     }
 
