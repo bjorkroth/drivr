@@ -8,13 +8,11 @@ import '../routing/app_router.dart';
 void main() async {
   runApp(MultiProvider(
       providers: AppProvider().providers,
-      child: MyApp()));
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key}) {
-    Initializer().run();
-  }
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override

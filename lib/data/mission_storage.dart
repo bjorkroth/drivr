@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 
+import 'package:drivr/initializers/initializer.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../initializers/create_local_mission_file.dart';
 import '../models/mission_model.dart';
 
 class MissionStorage{
@@ -23,6 +25,11 @@ class MissionStorage{
 
       // Read the file
       var file = File(filePath);
+
+      if(await file.exists() == false){
+        await CreateLocalMissionFile().createLocalMissionFileIfNotExist();
+      }
+
       var contents = await file.readAsString();
       List<dynamic> data = await json.decode(contents);
 
