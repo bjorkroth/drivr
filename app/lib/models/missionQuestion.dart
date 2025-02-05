@@ -14,8 +14,13 @@ class MissionQuestion{
     final int questionId = data['questionId'];
     final String question = data['question'];
     final String answer = data['answer'];
-    final List<String> alternatives = data['alternatives'];
+    final List<dynamic> alternativesDynamic = data['alternatives'];
 
-    return MissionQuestion(questionId, question, answer, alternatives);
+    List<String> alternativesString = [];
+    for (var element in alternativesDynamic) {
+      alternativesString.add(element.toString());
+    }
+
+    return MissionQuestion(questionId, question, answer, alternativesString);
   }
 }

@@ -42,6 +42,14 @@ go_router
 2.19
 file:///C:/Users/Thomas/AppData/Local/Pub/Cache/hosted/pub.dev/go_router-10.1.2/
 file:///C:/Users/Thomas/AppData/Local/Pub/Cache/hosted/pub.dev/go_router-10.1.2/lib/
+http
+3.0
+file:///C:/Users/Thomas/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.1.0/
+file:///C:/Users/Thomas/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.1.0/lib/
+http_parser
+2.12
+file:///C:/Users/Thomas/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2/
+file:///C:/Users/Thomas/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2/lib/
 json_annotation
 2.19
 file:///C:/Users/Thomas/AppData/Local/Pub/Cache/hosted/pub.dev/json_annotation-4.8.1/
@@ -162,6 +170,10 @@ test_api
 2.18
 file:///C:/Users/Thomas/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.6.0/
 file:///C:/Users/Thomas/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.6.0/lib/
+typed_data
+2.17
+file:///C:/Users/Thomas/AppData/Local/Pub/Cache/hosted/pub.dev/typed_data-1.3.2/
+file:///C:/Users/Thomas/AppData/Local/Pub/Cache/hosted/pub.dev/typed_data-1.3.2/lib/
 vector_math
 2.14
 file:///C:/Users/Thomas/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4/
@@ -180,8 +192,8 @@ file:///C:/Users/Thomas/AppData/Local/Pub/Cache/hosted/pub.dev/xdg_directories-1
 file:///C:/Users/Thomas/AppData/Local/Pub/Cache/hosted/pub.dev/xdg_directories-1.0.3/lib/
 drivr
 3.0
-file:///D:/Dev/drivr/
-file:///D:/Dev/drivr/lib/
+file:///D:/Dev/drivr/app/
+file:///D:/Dev/drivr/app/lib/
 sky_engine
 3.0
 file:///D:/Dev/flutter/flutter/bin/cache/pkg/sky_engine/
