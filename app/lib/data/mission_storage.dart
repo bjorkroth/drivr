@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'package:drivr/initializers/initializer.dart';
 import 'package:path_provider/path_provider.dart';
@@ -21,21 +22,16 @@ class MissionStorage{
 
   Future<List<MissionModel>> readMissions() async {
     try {
-      final filePath = await _localFile;
 
-      // Read the file
-      var file = File(filePath);
-
-      if(await file.exists() == false){
-        await CreateLocalMissionFile().createLocalMissionFileIfNotExist();
-      }
-
-      var contents = await file.readAsString();
-      List<dynamic> data = await json.decode(contents);
+      final response = await http.get(Uri.parse('https://api-drivr-test-bgebb6bqa5caa7fn.swedencentral-01.azurewebsites.net/'));
 
       List<MissionModel> missions = [];
-      for (var element in data) {
-        missions.add(MissionModel.fromJson(element));
+      if(response.statusCode == 200){
+        List<dynamic> data = await json.decode(response.body);
+
+        for (var element in data) {
+          missions.add(MissionModel.fromJson(element as Map<String, dynamic>));
+        }
       }
 
       return missions;

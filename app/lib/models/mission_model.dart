@@ -34,11 +34,11 @@ class MissionModel{
     final int experienceEarned = data['experienceEarned'];
     final bool canBeDoneMultipleTimes = data['canBeDoneMultipleTimes'];
     final String type = data['type'];
-    final List<Map<String,dynamic>> questionsData = data['questions'];
+    final List<dynamic> questionsData = data['questions'];
     List<MissionQuestion> questions = [];
 
     questionsData.forEach((element) {
-      MissionQuestion.fromJson(element);
+      MissionQuestion.fromJson(element as Map<String,dynamic>);
     });
 
     return MissionModel(id, name, level, accomplished, description, experienceEarned, canBeDoneMultipleTimes, type, questions);
