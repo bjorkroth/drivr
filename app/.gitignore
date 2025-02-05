@@ -3,6 +3,7 @@
 build/
 .dart_tool/flutter_build
 .dart_tool/chrome-device
+.dart_tool
 
 # Local configuration file (sdk path, etc)
 local.properties
