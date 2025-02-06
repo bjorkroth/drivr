@@ -1,4 +1,5 @@
 import 'package:drivr/widgets/mission_detail_icon_row_item.dart';
+import 'package:drivr/widgets/mission_question_item.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -37,10 +38,14 @@ class MissionDetailsScreen extends StatelessWidget {
         child: const Text('Mark as accomplished'));
     var accomplishRowButton = ElevatedButton(
         onPressed: markAsAccomplished,
-        child: const MissionDetailIconRowItem(text: " Accomplish", icon: Icons.add, textColor: Colors.black)
+        child: const MissionDetailIconRowItem(
+            text: " Accomplish", icon: Icons.add, textColor: Colors.black));
+    var alreadyDoneText = const Text(
+      'Mission is already accomplished',
+      style: TextStyle(fontStyle: FontStyle.italic),
     );
-    var alreadyDoneText = const Text('Mission is already accomplished', style: TextStyle(fontStyle: FontStyle.italic),);
-    var doneIconRow = const MissionDetailIconRowItem(text: " Done", icon: Icons.done, textColor: Colors.white);
+    var doneIconRow = const MissionDetailIconRowItem(
+        text: " Done", icon: Icons.done, textColor: Colors.white);
     Widget actionButton;
     Widget doneOrActionRowButton;
 
@@ -50,6 +55,14 @@ class MissionDetailsScreen extends StatelessWidget {
     } else {
       actionButton = accomplishButton;
       doneOrActionRowButton = accomplishRowButton;
+    }
+
+    var questions = currentMission.questions;
+
+    Widget questionListBuilder(BuildContext context, int index) {
+      if (index >= questions.length) return Container();
+
+      return MissionQuestionItem(missionQuestion: questions[index], missionId: currentMissionId);
     }
 
     return Scaffold(
@@ -62,19 +75,20 @@ class MissionDetailsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 200,
-            color: Colors.amber,
-            child:
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Padding(padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16), child:
-                Text('Mission ${currentMission.name}',
-                    style: const TextStyle(fontSize: 26, color: Colors.white)),
-                    )
+              height: 200,
+              color: Colors.amber,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16, horizontal: 16),
+                    child: Text('Mission ${currentMission.name}',
+                        style:
+                            const TextStyle(fontSize: 26, color: Colors.white)),
+                  )
                 ],
-            )
-          ),
+              )),
           Container(
             height: 70,
             color: Colors.blueGrey,
@@ -84,8 +98,16 @@ class MissionDetailsScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                MissionDetailIconRowItem(text: 'Level ${currentMission.level}', icon: Icons.format_list_numbered_rounded, textColor: Colors.white,),
-                MissionDetailIconRowItem(text: '${currentMission.experienceEarned} XP', icon: Icons.grade, textColor: Colors.white,),
+                MissionDetailIconRowItem(
+                  text: 'Level ${currentMission.level}',
+                  icon: Icons.format_list_numbered_rounded,
+                  textColor: Colors.white,
+                ),
+                MissionDetailIconRowItem(
+                  text: '${currentMission.experienceEarned} XP',
+                  icon: Icons.grade,
+                  textColor: Colors.white,
+                ),
                 doneOrActionRowButton
               ],
             ),
@@ -103,7 +125,13 @@ class MissionDetailsScreen extends StatelessWidget {
                 )
               ],
             ),
-          )
+          ),
+          Container(
+              height: 350,
+              child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  itemCount: questions.length,
+                  itemBuilder: questionListBuilder)),
         ],
       ),
       bottomNavigationBar: DrivrBottomBar(menuBarSelectedItem: 1),

@@ -37,9 +37,10 @@ class MissionModel{
     final List<dynamic> questionsData = data['questions'];
     List<MissionQuestion> questions = [];
 
-    questionsData.forEach((element) {
-      MissionQuestion.fromJson(element as Map<String,dynamic>);
-    });
+    for (var element in questionsData) {
+      var parsedQuestion = MissionQuestion.fromJson(element as Map<String,dynamic>);
+      questions.add(parsedQuestion);
+    }
 
     return MissionModel(id, name, level, accomplished, description, experienceEarned, canBeDoneMultipleTimes, type, questions);
   }
