@@ -1,11 +1,6 @@
-interface MissionQuestion{
-    questionId:number;
-    question:string;
-    answer:string;
-    alternatives:string[]
-}
+import MissionQuestion from "./MissionQuestion";
 
-export interface Mission{
+export default interface Mission{
     id:number;
     name:string;
     level:number;

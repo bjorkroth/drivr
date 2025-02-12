@@ -1,10 +1,9 @@
-import { Mission } from "../missions";
+import Mission from "../models/Mission";
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const password = encodeURIComponent("");
-const uri = "mongodb+srv://drivr:"+password+"@drivr.wycjf.mongodb.net/?retryWrites=true&w=majority&appName=drivr";
+let connectionString = process.env.DB_CONN_STRING;
 
-const client = new MongoClient(uri, {
+const client = new MongoClient(connectionString, {
     serverApi: {
       version: ServerApiVersion.v1,
       strict: true,
@@ -28,5 +27,24 @@ export async function fetchMessions() : Promise<Mission[]> {
           console.log("client closed")
         })
       }
+} 
+
+export async function getSingleMission(missionId : number) : Promise<Mission> {
+  try {
+      const database = client.db('drivr');
+      const missionsCollections = database.collection('missions');
+
+      const findQuery = { id: missionId };
+
+      const mission = await missionsCollections.findOne(findQuery);
+
+      return mission;
+
+    } finally {
+      // Ensures that the client will close when you finish/error
+      client.close().then(() => {
+        console.log("client closed")
+      })
+    }
 } 
 
