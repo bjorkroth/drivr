@@ -23,9 +23,7 @@ export async function getUserById(userId: string): Promise<User> {
 
     } finally {
         // Ensures that the client will close when you finish/error
-        client.close().then(() => {
-            console.log("client closed")
-        })
+        client.close().then(() => {})
     }
 }
 
@@ -53,9 +51,7 @@ export async function addExperienceById(userId: string, experienceEarned: number
 
     } finally {
         // Ensures that the client will close when you finish/error
-        client.close().then(() => {
-            console.log("client closed")
-        })
+        client.close().then(() => {})
     }
 }
 
@@ -83,9 +79,7 @@ export async function setUserProgressLevel(userId: string, progressLevel: number
 
     } finally {
         // Ensures that the client will close when you finish/error
-        client.close().then(() => {
-            console.log("client closed")
-        })
+        client.close().then(() => {})
     }
 }
 
@@ -110,8 +104,6 @@ export async function saveNewUser(user: User): Promise<User> {
         throw new Error((<Error>e).message)
     } finally {
         // Ensures that the client will close when you finish/error
-        client.close().then(() => {
-            console.log("client closed")
-        })
+        client.close().then(() => {})
     }
 } 
