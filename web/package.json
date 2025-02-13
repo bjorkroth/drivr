@@ -7,7 +7,7 @@
     "start": "tsx src/index.ts",
     "dev": "tsx watch --env-file=.env.local src/index.ts",
     "build": "tsc",
-    "serve": "tsx dist/index.js"
+    "serve": "node dist/index.js"
   },
   "author": "Thomas Björkroth",
   "license": "ISC",
