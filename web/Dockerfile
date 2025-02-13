@@ -50,8 +50,11 @@ RUN npm run build
 # where the necessary files are copied from the build stage.
 FROM base as final
 
+ARG DB_CONN_STRING
+
 # Use production node environment by default.
-ENV NODE_ENV production
+ENV NODE_ENV=production
+ENV DB_CONN_STRING=$DB_CONN_STRING
 
 # Run the application as a non-root user.
 USER node
