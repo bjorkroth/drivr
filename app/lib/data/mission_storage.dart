@@ -2,11 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
-import 'package:drivr/initializers/initializer.dart';
 import 'package:path_provider/path_provider.dart';
-
-import '../initializers/create_local_mission_file.dart';
 import '../models/mission_model.dart';
 
 class MissionStorage{
@@ -23,7 +19,7 @@ class MissionStorage{
   Future<List<MissionModel>> readMissions() async {
     try {
 
-      final response = await http.get(Uri.parse('https://api-drivr-test-bgebb6bqa5caa7fn.swedencentral-01.azurewebsites.net/'));
+      final response = await http.get(Uri.parse('https://api-drivr-test-bgebb6bqa5caa7fn.swedencentral-01.azurewebsites.net/missions'));
 
       List<MissionModel> missions = [];
       if(response.statusCode == 200){
@@ -38,6 +34,33 @@ class MissionStorage{
     } catch (e) {
       // If encountering an error, return 0
       return [];
+    }
+  }
+
+  Future<MissionModel> getMissionById(int missionId) async {
+    try{
+      final response = await http.get(Uri.parse('https://api-drivr-test-bgebb6bqa5caa7fn.swedencentral-01.azurewebsites.net/missions/$missionId'));
+
+      if(response.statusCode != 200){
+        throw Exception("Could not get mission ");
+      }
+
+      dynamic data = await json.decode(response.body);
+      return MissionModel.fromJson(data as Map<String, dynamic>);
+    } catch (e) {
+      throw Exception("Could not get mission");
+    }
+  }
+
+  Future<void> postAccomplishMission(int missionId) async {
+    try{
+      final response = await http.get(Uri.parse('https://api-drivr-test-bgebb6bqa5caa7fn.swedencentral-01.azurewebsites.net/missions/$missionId/accomplish'));
+
+      if(response.statusCode != 200){
+        throw Exception("Could not accomplish mission");
+      }
+    } catch (e) {
+      return;
     }
   }
 
