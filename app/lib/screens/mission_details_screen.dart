@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
+import '../auth/auth_provider.dart';
 import '../data/missionList.dart';
 import '../models/mission_model.dart';
 import '../models/progress_model.dart';
@@ -44,6 +45,7 @@ class _MissionDetailsState extends State<MissionDetailsContainer> {
   @override
   Widget build(BuildContext context) {
     var progressContext = context.watch<ProgressModel>();
+    var authProvider = context.watch<AuthProvider>();
     var missionContext = context.watch<MissionsList>();
 
     return FutureBuilder(
@@ -51,6 +53,7 @@ class _MissionDetailsState extends State<MissionDetailsContainer> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             var currentMission = snapshot.data;
+            var currentUserId = authProvider.currentUser;
 
             if (currentMission == null) return Container();
 
@@ -60,7 +63,7 @@ class _MissionDetailsState extends State<MissionDetailsContainer> {
 
             void markAsAccomplished() async {
               missionContext.accomplishMission(currentMission.id);
-              await missionContext.accomplishMissionAsync(currentMission.id);
+              await missionContext.accomplishMissionAsync(currentMission.id, currentUserId);
               await progressContext
                   .saveExperience(currentMission.experienceEarned);
 

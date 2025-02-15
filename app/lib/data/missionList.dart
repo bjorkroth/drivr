@@ -22,11 +22,11 @@ class MissionsList extends ChangeNotifier {
     return getById(position);
   }
 
-  Future<void> accomplishMissionAsync(int id) async{
+  Future<void> accomplishMissionAsync(int missionId, String userId) async{
      final prefs = await SharedPreferences.getInstance();
-     prefs.setBool('mission-$id', true);
+     prefs.setBool('mission-$missionId', true);
      
-     await MissionStorage().postAccomplishMission(id);
+     await MissionStorage().postAccomplishMission(missionId);
      await loadMissions();
      notifyListeners();
   }
