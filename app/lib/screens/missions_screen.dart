@@ -1,3 +1,4 @@
+import 'package:drivr/widgets/loading_progress_indicator.dart';
 import 'package:drivr/widgets/mission_list_card.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -76,7 +77,7 @@ class _MissionScreen extends State<MissionsScreen> {
                           )));
                 });
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const LoadingProgressIndicator(loadingText: "Loading missions");
           }
         },
       ),

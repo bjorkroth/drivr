@@ -1,4 +1,5 @@
 import 'package:drivr/data/mission_storage.dart';
+import 'package:drivr/widgets/loading_progress_indicator.dart';
 import 'package:drivr/widgets/mission_detail_icon_row_item.dart';
 import 'package:drivr/widgets/mission_question_item.dart';
 import 'package:go_router/go_router.dart';
@@ -175,16 +176,7 @@ class _MissionDetailsState extends State<MissionDetailsContainer> {
               bottomNavigationBar: DrivrBottomBar(menuBarSelectedItem: 1),
             );
           } else {
-            return const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: Text("Loading mission details",
-                      style:
-                      TextStyle(color: Colors.black, fontSize: 14, decoration: TextDecoration.none))),
-                ]);
+            return const LoadingProgressIndicator(loadingText: "Loading Mission Details");
           }
         });
   }
