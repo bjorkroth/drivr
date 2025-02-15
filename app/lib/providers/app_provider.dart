@@ -38,13 +38,13 @@ class AppProvider{
     ),
     ChangeNotifierProxyProvider(
         create: (context){
-          var profile = ProfileModel(LocalStorageProfileStorage());
-          profile.getLatestFromStore();
-          return profile;
+          // var profile = ProfileModel(LocalStorageProfileStorage());
+          // profile.getLatestFromStore();
+          // return profile;
         },
         update: (context, _, profile) {
-          if (profile == null) throw ArgumentError.notNull('profile');
-          return profile;
+          // if (profile == null) throw ArgumentError.notNull('profile');
+          // return profile;
         })
   ];
 }

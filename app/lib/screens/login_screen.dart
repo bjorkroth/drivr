@@ -1,3 +1,5 @@
+import 'package:drivr/data/database_profile_storage.dart';
+import 'package:drivr/widgets/no_user_found.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -36,17 +38,20 @@ class _Login extends State<LoginScreen>{
     }
 
     void login() async{
-      var profileModel = context.read<ProfileModel>();
       var authProvider = context.read<AuthProvider>();
 
       if(formData.name!.isEmpty){
         return;
       }
 
-      await profileModel.setName(formData.name ?? "");
-      await authProvider.logInUser(formData.name ?? "");
+      var profile = await DatabaseProfileStorage().getProfileByUserName(formData.name ?? "");
 
-      navigateToProfilePage();
+      if(profile.id.isNotEmpty){
+        await authProvider.logInUser(profile.id ?? "");
+        // await profileModel.setName(formData.name ?? "");
+
+        navigateToProfilePage();
+      }
     }
 
     return Scaffold(
