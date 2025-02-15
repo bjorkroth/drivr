@@ -27,6 +27,30 @@ export async function getUserById(userId: string): Promise<User> {
     }
 }
 
+export async function getUserByProfileName(profileName: string): Promise<User> {
+    const client = new MongoClient(connectionString, {
+        serverApi: {
+            version: ServerApiVersion.v1,
+            strict: true,
+            deprecationErrors: true,
+        }
+    });
+
+    try {
+        const database = client.db('drivr');
+        const usersCollection = database.collection('users');
+        const findQuery = { profileName: profileName };
+
+        const user = await usersCollection.findOne(findQuery);
+
+        return user;
+
+    } finally {
+        // Ensures that the client will close when you finish/error
+        client.close().then(() => {})
+    }
+}
+
 export async function addExperienceById(userId: string, experienceEarned: number): Promise<number> {
     const client = new MongoClient(process.env.DB_CONN_STRING, {
         serverApi: {

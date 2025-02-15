@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { addExperienceById, getUserById, saveNewUser, setUserProgressLevel } from "../data/usersRepository";
+import { addExperienceById, getUserById, getUserByProfileName, saveNewUser, setUserProgressLevel } from "../data/usersRepository";
 var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
 
@@ -16,6 +16,13 @@ usersRouter.get("/:userId", async (req: Request, res: Response) => {
     var userFromDb = await getUserById(userId)
     res.send(userFromDb);
 });
+
+usersRouter.get("/profileName/:profileName", async (req: Request, res: Response) => {
+    var userId = req.params.profileName;
+    var userFromDb = await getUserByProfileName(userId)
+    res.send(userFromDb);
+});
+
 
 usersRouter.put("/:userId/experience", jsonParser, async (req: Request, res: Response) => {
     var userId = req.params.userId;
