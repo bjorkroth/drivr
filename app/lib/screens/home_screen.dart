@@ -35,7 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
       context.go('/login');
     }
 
-    var currentUser = context.read<ProfileModel>();
+    // var currentUser = context.read<ProfileModel>();
+    var currentUser = "Current user";
     Animation<double> animation = const AlwaysStoppedAnimation(0);
     var headerTextStyle =
         const TextStyle(fontFamily: 'Montserrat', fontSize: 25);
@@ -56,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 25),
                       child: Text(
-                        'Welcome ${currentUser.name}!',
+                        'Welcome $currentUser!',
                         style: headerTextStyle,
                       ))
                 ],

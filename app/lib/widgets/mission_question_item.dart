@@ -1,6 +1,5 @@
 import 'package:drivr/models/missionQuestion.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -31,11 +30,15 @@ class MissionQuestionItem extends StatelessWidget {
       navigateToMissionDetailsPage();
     }
 
+    void navigateToCorrectAnswerScreen(){
+      context.go('/missions/questions/correct');
+    }
+
     Future<void> answerQuestionCorrectly() async {
       await MissionStorage().postQuestionAnswer(
           missionId, missionQuestion.questionId, currentUserId, true, "");
       await progressContext.saveExperience(5);
-      navigateToMissionDetailsPage();
+      navigateToCorrectAnswerScreen();
     }
 
     for (var element in missionQuestion.alternatives) {

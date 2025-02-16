@@ -1,5 +1,6 @@
 import 'package:drivr/screens/mission_question_screen.dart';
 import 'package:drivr/screens/settings_screen.dart';
+import 'package:drivr/widgets/correct_question_answer.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -64,7 +65,7 @@ class AppRouter {
       },
     ),
     GoRoute(
-      path: '/missions/:missionId/question/:questionId',
+      path: '/missions/:missionId/questions',
       builder: (BuildContext context, GoRouterState state) {
         if (!context.read<AuthProvider>().isLoggedIn) {
           return const LoginScreen();
@@ -72,12 +73,19 @@ class AppRouter {
         return MissionQuestionScreen(
             currentMissionId:
             int.parse(state.pathParameters['missionId'] ?? ""),
-            currentQuestionId:
-            int.parse(state.pathParameters['questionId'] ?? ""),
+            // currentQuestionId:
+            // int.parse(state.pathParameters['questionId'] ?? ""),
             currentUserId: context.read<AuthProvider>().currentUser
         );
       },
     ),
+    GoRoute(path: '/missions/questions/correct', builder: (BuildContext context, GoRouterState state){
+      if (!context.read<AuthProvider>().isLoggedIn) {
+        return const LoginScreen();
+      }
+
+      return const CorrectQuestionAnswer();
+    }),
     GoRoute(
       path: '/shop',
       builder: (BuildContext context, GoRouterState state) {

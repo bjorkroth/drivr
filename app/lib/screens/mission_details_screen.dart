@@ -1,4 +1,5 @@
 import 'package:drivr/data/mission_storage.dart';
+import 'package:drivr/widgets/drivr_app_layout.dart';
 import 'package:drivr/widgets/loading_progress_indicator.dart';
 import 'package:drivr/widgets/mission_detail_icon_row_item.dart';
 import 'package:drivr/widgets/mission_question_item.dart';
@@ -18,18 +19,21 @@ class MissionDetailsScreen extends StatelessWidget {
   final int currentMissionId;
   final String currentUserId;
 
-  const MissionDetailsScreen({super.key, required this.currentMissionId, required this.currentUserId});
+  const MissionDetailsScreen(
+      {super.key, required this.currentMissionId, required this.currentUserId});
 
   @override
   Widget build(BuildContext context) {
-    return MissionDetailsContainer(currentMissionId: currentMissionId, currentUserId: currentUserId);
+    return MissionDetailsContainer(
+        currentMissionId: currentMissionId, currentUserId: currentUserId);
   }
 }
 
 class MissionDetailsContainer extends StatefulWidget {
   final int currentMissionId;
   final String currentUserId;
-  const MissionDetailsContainer({super.key, required this.currentMissionId, required this.currentUserId});
+  const MissionDetailsContainer(
+      {super.key, required this.currentMissionId, required this.currentUserId});
 
   @override
   State<StatefulWidget> createState() => _MissionDetailsState();
@@ -41,8 +45,8 @@ class _MissionDetailsState extends State<MissionDetailsContainer> {
   @override
   void initState() {
     super.initState();
-    currentMissionFuture =
-        MissionStorage().getMissionById(widget.currentMissionId, widget.currentUserId);
+    currentMissionFuture = MissionStorage()
+        .getMissionById(widget.currentMissionId, widget.currentUserId);
   }
 
   @override
@@ -64,9 +68,15 @@ class _MissionDetailsState extends State<MissionDetailsContainer> {
               context.go('/missions');
             }
 
+            void navigateToMissionQuestionsPage() {
+              var missionId = currentMission.id;
+              context.go('/missions/$missionId/questions');
+            }
+
             void markAsAccomplished() async {
               missionContext.accomplishMission(currentMission.id);
-              await missionContext.accomplishMissionAsync(currentMission.id, currentUserId);
+              await missionContext.accomplishMissionAsync(
+                  currentMission.id, currentUserId);
               await progressContext
                   .saveExperience(currentMission.experienceEarned);
 
@@ -99,83 +109,101 @@ class _MissionDetailsState extends State<MissionDetailsContainer> {
               doneOrActionRowButton = accomplishRowButton;
             }
 
-            var questions = currentMission.questions;
-
-
-            return Scaffold(
-              appBar: DrivrAppBar(
-                  title: 'Mission ${currentMission.id}',
-                  preferredSize: const Size.fromHeight(80.0),
-                  child: Container()),
-              drawer: const DrivrDrawerMenu(),
-              body: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                      height: 200,
-                      color: Colors.amber,
+            return DrivrAppLayout(
+                title: 'Mission ${currentMission.id}',
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                        height: 200,
+                        color: Colors.amber,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 16),
+                              child: Text('Mission ${currentMission.name}',
+                                  style: const TextStyle(
+                                      fontSize: 26, color: Colors.white)),
+                            )
+                          ],
+                        )),
+                    Container(
+                      height: 70,
+                      color: Colors.blueGrey,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          MissionDetailIconRowItem(
+                            text: 'Level ${currentMission.level}',
+                            icon: Icons.format_list_numbered_rounded,
+                            textColor: Colors.white,
+                          ),
+                          MissionDetailIconRowItem(
+                            text: '${currentMission.experienceEarned} XP',
+                            icon: Icons.grade,
+                            textColor: Colors.white,
+                          ),
+                          doneOrActionRowButton
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 70,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          ElevatedButton(
+                              onPressed: markAsAccomplished,
+                              child: const MissionDetailIconRowItem(
+                                  text: " Exercise",
+                                  icon: Icons.sports_gymnastics,
+                                  textColor: Colors.black)),
+                          ElevatedButton(
+                              onPressed: navigateToMissionQuestionsPage,
+                              child: const MissionDetailIconRowItem(
+                                  text: " Quiz",
+                                  icon: Icons.question_answer,
+                                  textColor: Colors.black)),
+                          ElevatedButton(
+                              onPressed: markAsAccomplished,
+                              child: const MissionDetailIconRowItem(
+                                  text: " Read more",
+                                  icon: Icons.list,
+                                  textColor: Colors.black)),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('Description:'),
+                          Text(currentMission.description),
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 16, horizontal: 16),
-                            child: Text('Mission ${currentMission.name}',
-                                style: const TextStyle(
-                                    fontSize: 26, color: Colors.white)),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: actionButton,
                           )
                         ],
-                      )),
-                  Container(
-                    height: 70,
-                    color: Colors.blueGrey,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        MissionDetailIconRowItem(
-                          text: 'Level ${currentMission.level}',
-                          icon: Icons.format_list_numbered_rounded,
-                          textColor: Colors.white,
-                        ),
-                        MissionDetailIconRowItem(
-                          text: '${currentMission.experienceEarned} XP',
-                          icon: Icons.grade,
-                          textColor: Colors.white,
-                        ),
-                        doneOrActionRowButton
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Description:'),
-                        Text(currentMission.description),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: actionButton,
-                        )
-                      ],
-                    ),
-                  ),
-                  // Container(
-                  //     height: 350,
-                  //     child: ListView.builder(
-                  //         padding: const EdgeInsets.symmetric(vertical: 5),
-                  //         itemCount: questions.length,
-                  //         itemBuilder: questionListBuilder)),
-                ],
-              ),
-              bottomNavigationBar: DrivrBottomBar(menuBarSelectedItem: 1),
-            );
+                    // Container(
+                    //     height: 350,
+                    //     child: ListView.builder(
+                    //         padding: const EdgeInsets.symmetric(vertical: 5),
+                    //         itemCount: questions.length,
+                    //         itemBuilder: questionListBuilder)),
+                  ],
+                ));
           } else {
-            return const LoadingProgressIndicator(loadingText: "Loading Mission Details");
+            return const LoadingProgressIndicator(
+                loadingText: "Loading Mission Details");
           }
         });
   }
