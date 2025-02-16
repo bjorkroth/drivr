@@ -12,26 +12,29 @@ missionsRouter.get("/", async (req: Request, res: Response) => {
   res.send(missions);
 });
 
-missionsRouter.get("/:missionId", async (req: Request, res: Response) => {
+missionsRouter.get("/:missionId/user/:userId", async (req: Request, res: Response) => {
   var missionId = req.params.missionId;
+  var userId = req.params.userId;
+
   var mission = await getSingleMission(Number(missionId));
+  var missionEvents = await getMissionEvents(missionId, userId);
+  var missionIsAccomplished = missionEvents.find((event) => event.isCompleted)?.isCompleted ?? false;
+
+  mission.accomplished = missionIsAccomplished;
+
   res.send(mission);
 });
 
-missionsRouter.post("/:missionId/accomplish", jsonParser, async (req: Request, res: Response) => {
+missionsRouter.post("/:missionId/user/:userId/accomplish", jsonParser, async (req: Request, res: Response) => {
   var missionId = req.params.missionId;
-  var body = req.body;
+  var userId = req.params.userId;
 
-  if(body.userId === undefined){
-    res.status(400).send();
-  }
-  
   await saveEvent({
     id: uuidv6().toString(),
     type: "Mission",
     dateTime: new Date(Date.now()),
     reference: missionId,
-    userId: body.userId,
+    userId: userId,
     isCompleted: true,
     value: ""
   })
@@ -39,9 +42,10 @@ missionsRouter.post("/:missionId/accomplish", jsonParser, async (req: Request, r
   res.status(201).send();
 });
 
-missionsRouter.post("/:missionId/question/:questionId/answer", jsonParser, async (req: Request, res: Response) => {
+missionsRouter.post("/:missionId/question/:questionId/user/:userId/answer", jsonParser, async (req: Request, res: Response) => {
   var missionId = req.params.missionId;
   var questionId = req.params.questionId;
+  var userId = req.params.userId;
   var answerBody = req.body;
 
   await saveEvent({
@@ -49,7 +53,7 @@ missionsRouter.post("/:missionId/question/:questionId/answer", jsonParser, async
     type: "Question",
     dateTime: new Date(Date.now()),
     reference: questionId,
-    userId: answerBody.userId,
+    userId: userId,
     isCompleted: answerBody.isCorrect,
     value: answerBody.answer
   })
