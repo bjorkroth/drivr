@@ -16,17 +16,20 @@ import '../widgets/drivr_drawer_menu.dart';
 
 class MissionDetailsScreen extends StatelessWidget {
   final int currentMissionId;
-  const MissionDetailsScreen({super.key, required this.currentMissionId});
+  final String currentUserId;
+
+  const MissionDetailsScreen({super.key, required this.currentMissionId, required this.currentUserId});
 
   @override
   Widget build(BuildContext context) {
-    return MissionDetailsContainer(currentMissionId: currentMissionId);
+    return MissionDetailsContainer(currentMissionId: currentMissionId, currentUserId: currentUserId);
   }
 }
 
 class MissionDetailsContainer extends StatefulWidget {
   final int currentMissionId;
-  const MissionDetailsContainer({super.key, required this.currentMissionId});
+  final String currentUserId;
+  const MissionDetailsContainer({super.key, required this.currentMissionId, required this.currentUserId});
 
   @override
   State<StatefulWidget> createState() => _MissionDetailsState();
@@ -39,7 +42,7 @@ class _MissionDetailsState extends State<MissionDetailsContainer> {
   void initState() {
     super.initState();
     currentMissionFuture =
-        MissionStorage().getMissionById(widget.currentMissionId);
+        MissionStorage().getMissionById(widget.currentMissionId, widget.currentUserId);
   }
 
   @override
@@ -98,13 +101,6 @@ class _MissionDetailsState extends State<MissionDetailsContainer> {
 
             var questions = currentMission.questions;
 
-            Widget questionListBuilder(BuildContext context, int index) {
-              if (index >= questions.length) return Container();
-
-              return MissionQuestionItem(
-                  missionQuestion: questions[index],
-                  missionId: currentMission.id);
-            }
 
             return Scaffold(
               appBar: DrivrAppBar(

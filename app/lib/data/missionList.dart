@@ -13,8 +13,8 @@ class MissionsList extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<MissionModel> getByIdAsync(int id) async =>
-      await MissionStorage().getMissionById(id);
+  Future<MissionModel> getByIdAsync(int id, String userId) async =>
+      await MissionStorage().getMissionById(id, userId);
 
   MissionModel getById(int id) => missions.firstWhere((mission) => mission.id == id);
 
@@ -26,7 +26,7 @@ class MissionsList extends ChangeNotifier {
      final prefs = await SharedPreferences.getInstance();
      prefs.setBool('mission-$missionId', true);
      
-     await MissionStorage().postAccomplishMission(missionId);
+     await MissionStorage().postAccomplishMission(missionId, userId);
      await loadMissions();
      notifyListeners();
   }

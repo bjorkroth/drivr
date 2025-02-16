@@ -39,9 +39,9 @@ class MissionStorage {
     }
   }
 
-  Future<MissionModel> getMissionById(int missionId) async {
+  Future<MissionModel> getMissionById(int missionId, String userId) async {
     try {
-      final response = await http.get(Uri.parse('$apiUrl/missions/$missionId'));
+      final response = await http.get(Uri.parse('$apiUrl/missions/$missionId/user/$userId'));
 
       if (response.statusCode != 200) {
         throw Exception("Could not get mission ");
@@ -57,8 +57,23 @@ class MissionStorage {
   Future<void> postAccomplishMission(int missionId, String userId) async {
     try {
       final response = await http.post(
-          Uri.parse('$apiUrl/missions/$missionId/accomplish'),
-          body: {userId: userId});
+          Uri.parse('$apiUrl/missions/$missionId/user/$userId/accomplish'));
+
+      if (response.statusCode != 200) {
+        throw Exception("Could not accomplish mission");
+      }
+    } catch (e) {
+      return;
+    }
+  }
+
+  Future<void> postQuestionAnswer(int missionId, int questionId, String userId, bool isCorrect, String answer) async {
+    try {
+      final response = await http.post(
+          Uri.parse('$apiUrl/missions/$missionId/question/$questionId/user/$userId/answer'),body: {
+            isCorrect: isCorrect,
+            answer: answer
+      });
 
       if (response.statusCode != 200) {
         throw Exception("Could not accomplish mission");

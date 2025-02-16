@@ -1,3 +1,4 @@
+import 'package:drivr/screens/mission_question_screen.dart';
 import 'package:drivr/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -57,7 +58,24 @@ class AppRouter {
         }
         return MissionDetailsScreen(
             currentMissionId:
-            int.parse(state.pathParameters['missionId'] ?? ""));
+            int.parse(state.pathParameters['missionId'] ?? ""),
+            currentUserId: context.read<AuthProvider>().currentUser
+        );
+      },
+    ),
+    GoRoute(
+      path: '/missions/:missionId/question/:questionId',
+      builder: (BuildContext context, GoRouterState state) {
+        if (!context.read<AuthProvider>().isLoggedIn) {
+          return const LoginScreen();
+        }
+        return MissionQuestionScreen(
+            currentMissionId:
+            int.parse(state.pathParameters['missionId'] ?? ""),
+            currentQuestionId:
+            int.parse(state.pathParameters['questionId'] ?? ""),
+            currentUserId: context.read<AuthProvider>().currentUser
+        );
       },
     ),
     GoRoute(
