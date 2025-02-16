@@ -10,40 +10,46 @@ class CorrectQuestionAnswer extends StatelessWidget {
       context.go('/missions');
     }
 
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      const Padding(
-          padding: EdgeInsets.symmetric(vertical: 20),
-          child: Text("PERFECT!",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  decoration: TextDecoration.none))),
-      const Padding(
-          padding: EdgeInsets.symmetric(vertical: 20),
-          child: Icon(
-            Icons.check_circle,
-            size: 32,
-            color: Colors.green,
-          )),
-      const Padding(
-          padding: EdgeInsets.symmetric(vertical: 20),
-          child: Text("Correct answer",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  decoration: TextDecoration.none))),
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        child: SizedBox(
-          height: 30,
-          width: double.infinity,
-          child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green, foregroundColor: Colors.white),
-              onPressed: navigateToMissionsPage,
-              child: const Text("Continue")),
-        ),
-      ),
-    ]);
+    return Container(
+        color: Colors.lightGreen,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          const Padding(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: Text("PERFECT!",
+                  style: TextStyle(
+                      color: Colors.yellow,
+                      fontSize: 52,
+                      decoration: TextDecoration.none))),
+          const Padding(
+              padding: EdgeInsets.symmetric(vertical: 30),
+              child: Icon(
+                Icons.check_circle,
+                size: 94,
+                color: Colors.green,
+              )),
+          const Padding(
+              padding: EdgeInsets.symmetric(vertical: 30),
+              child: Text("Correct answer",
+                  style: TextStyle(
+                      color: Colors.yellow,
+                      fontSize: 36,
+                      decoration: TextDecoration.none))),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: SizedBox(
+              height: 30,
+              width: double.infinity,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white),
+                  onPressed: navigateToMissionsPage,
+                  child: const Text("CONTINUE",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ))),
+            ),
+          )
+        ]));
   }
 }

@@ -41,4 +41,16 @@ class LocalStorageProfileStorage extends ProfilePersistence{
     // TODO: implement getProfileByUserName
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> putUserExperience(int progressExperience, String profileId) {
+    // TODO: implement putUserExperience
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> putUserLevel(int progressLevel, String userId) {
+    // TODO: implement putUserLevel
+    throw UnimplementedError();
+  }
 }

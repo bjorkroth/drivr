@@ -78,7 +78,7 @@ class _MissionDetailsState extends State<MissionDetailsContainer> {
               await missionContext.accomplishMissionAsync(
                   currentMission.id, currentUserId);
               await progressContext
-                  .saveExperience(currentMission.experienceEarned);
+                  .saveExperience(currentMission.experienceEarned,currentUserId);
 
               navigateToMissionPage();
             }
@@ -148,57 +148,46 @@ class _MissionDetailsState extends State<MissionDetailsContainer> {
                             icon: Icons.grade,
                             textColor: Colors.white,
                           ),
-                          doneOrActionRowButton
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 70,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          ElevatedButton(
-                              onPressed: markAsAccomplished,
-                              child: const MissionDetailIconRowItem(
-                                  text: " Exercise",
-                                  icon: Icons.sports_gymnastics,
-                                  textColor: Colors.black)),
-                          ElevatedButton(
-                              onPressed: navigateToMissionQuestionsPage,
-                              child: const MissionDetailIconRowItem(
-                                  text: " Quiz",
-                                  icon: Icons.question_answer,
-                                  textColor: Colors.black)),
-                          ElevatedButton(
-                              onPressed: markAsAccomplished,
-                              child: const MissionDetailIconRowItem(
-                                  text: " Read more",
-                                  icon: Icons.list,
-                                  textColor: Colors.black)),
                         ],
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text('Description:'),
-                          Text(currentMission.description),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: actionButton,
-                          )
-                        ],
+                          horizontal: 10, vertical: 10),
+                      child: Text(currentMission.description),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: SizedBox(
+                        height: 70,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            ElevatedButton(
+                                onPressed: markAsAccomplished,
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.black,
+                                    foregroundColor: Colors.white),
+                                child: const MissionDetailIconRowItem(
+                                    text: " Exercises",
+                                    icon: Icons.sports_gymnastics,
+                                    textColor: Colors.white)),
+                            ElevatedButton(
+                                onPressed: navigateToMissionQuestionsPage,
+                                child: const MissionDetailIconRowItem(
+                                    text: " Quiz",
+                                    icon: Icons.question_answer,
+                                    textColor: Colors.black)),
+                            ElevatedButton(
+                                onPressed: markAsAccomplished,
+                                child: const MissionDetailIconRowItem(
+                                    text: " Read more",
+                                    icon: Icons.list,
+                                    textColor: Colors.black)),
+                          ],
+                        ),
                       ),
                     ),
-                    // Container(
-                    //     height: 350,
-                    //     child: ListView.builder(
-                    //         padding: const EdgeInsets.symmetric(vertical: 5),
-                    //         itemCount: questions.length,
-                    //         itemBuilder: questionListBuilder)),
                   ],
                 ));
           } else {

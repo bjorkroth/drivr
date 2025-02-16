@@ -7,5 +7,7 @@ abstract class ProfilePersistence{
   Future<String> getId();
   Future<ProfileModel> getProfileById(String profileId);
   Future<ProfileModel> getProfileByUserName(String profileName);
+  Future<void> putUserExperience(int progressExperience, String userId);
+  Future<void> putUserLevel(int progressLevel, String userId);
 
 }

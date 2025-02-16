@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'profile_persistance.dart';
 
 class DatabaseProfileStorage extends ProfilePersistence{
-  static const String apiUrl = "https://api-drivr-test-bgebb6bqa5caa7fn.swedencentral-01.azurewebsites.net/";
+  static const String apiUrl = "https://api-drivr-test-bgebb6bqa5caa7fn.swedencentral-01.azurewebsites.net";
 
   @override
   Future<String> getId() {
@@ -61,6 +61,38 @@ class DatabaseProfileStorage extends ProfilePersistence{
       return ProfileModel.fromJson(data as Map<String, dynamic>);
     } catch (e) {
       throw Exception("Could not get mission");
+    }
+  }
+
+  @override
+  Future<void> putUserExperience(int progressExperience, String userId) async {
+    try{
+      var body = jsonEncode({
+        'progressExperience': progressExperience
+      });
+      final response = await http.put(Uri.parse('$apiUrl/users/$userId/experience'),body: body);
+
+      if(response.statusCode != 200){
+        throw Exception("Could not update user experience ");
+      }
+    } catch (e) {
+      throw Exception("Could not update user experience ");
+    }
+  }
+
+  @override
+  Future<void> putUserLevel(int progressLevel, String userId) async {
+    try{
+      var body = jsonEncode({
+        'progressLevel': progressLevel
+      });
+      final response = await http.put(Uri.parse('$apiUrl/users/$userId/level'),body: body);
+
+      if(response.statusCode != 200){
+        throw Exception("Could not update user level ");
+      }
+    } catch (e) {
+      throw Exception("Could not update user level ");
     }
   }
 

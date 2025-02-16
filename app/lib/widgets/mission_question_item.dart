@@ -8,7 +8,10 @@ import '../models/progress_model.dart';
 
 class MissionQuestionItem extends StatelessWidget {
   const MissionQuestionItem(
-      {super.key, required this.missionQuestion, required this.missionId, required this.currentUserId});
+      {super.key,
+      required this.missionQuestion,
+      required this.missionId,
+      required this.currentUserId});
 
   final MissionQuestion missionQuestion;
   final int missionId;
@@ -18,7 +21,7 @@ class MissionQuestionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var progressContext = context.watch<ProgressModel>();
 
-    List<ElevatedButton> alternatives = [];
+    List<Widget> alternatives = [];
 
     String status = "";
 
@@ -30,14 +33,14 @@ class MissionQuestionItem extends StatelessWidget {
       navigateToMissionDetailsPage();
     }
 
-    void navigateToCorrectAnswerScreen(){
+    void navigateToCorrectAnswerScreen() {
       context.go('/missions/questions/correct');
     }
 
     Future<void> answerQuestionCorrectly() async {
       await MissionStorage().postQuestionAnswer(
           missionId, missionQuestion.questionId, currentUserId, true, "");
-      await progressContext.saveExperience(5);
+      await progressContext.saveExperience(5, currentUserId);
       navigateToCorrectAnswerScreen();
     }
 
@@ -47,17 +50,27 @@ class MissionQuestionItem extends StatelessWidget {
           ? answerQuestionCorrectly
           : answerQuestionFalsely;
 
-      alternatives
-          .add(ElevatedButton(onPressed: answerMethod, child: Text(element)));
+      alternatives.add(Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          child:
+              ElevatedButton(onPressed: answerMethod, child: Text(element))));
     }
 
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Column(
           children: [
+            const Padding(
+                padding: EdgeInsets.symmetric(vertical: 30),
+                child: Icon(
+                  Icons.question_answer,
+                  size: 64,
+                  color: Colors.black12,
+                )),
             Text(missionQuestion.question,
                 style: const TextStyle(fontSize: 18)),
-            const Text("Options:"),
+            const Text("Options:", style: TextStyle(fontSize: 12)),
+            const VerticalDivider(),
             Column(
               children: alternatives,
             ),

@@ -1,3 +1,4 @@
+import 'package:drivr/data/database_profile_storage.dart';
 import 'package:flutter/material.dart';
 
 import '../data/progress_persistence.dart';
@@ -25,16 +26,23 @@ class ProgressModel extends ChangeNotifier{
     }
   }
 
-  Future<void> saveExperience(int amount) async{
+  Future<void> saveExperience(int amount, String userId) async{
     experience += amount;
     await _store.saveExperience(experience);
-    await updateUserLevel();
+    await DatabaseProfileStorage().putUserExperience(experience, userId);
+    await updateUserLevel(userId);
     notifyListeners();
   }
 
-  Future<void> updateUserLevel() async{
+  Future<void> updateUserLevel(String userId) async{
     var userLevel  = GetUserLevelForExperiencePoints().getLevel(experience);
+
+    if(currentLevel == userLevel){
+      return;
+    }
+
     await _store.updateUserLevel(userLevel);
     currentLevel = userLevel;
+    await DatabaseProfileStorage().putUserLevel(userLevel, userId);
   }
 }

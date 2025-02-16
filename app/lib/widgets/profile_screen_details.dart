@@ -36,8 +36,8 @@ class _ProfileScreenDetails extends State<ProfileScreenDetails> {
                 Text('Profile name ${profile.name}',
                     style: const TextStyle(fontWeight: FontWeight.bold)),
                 Text('Email: ${profile.email}'),
-                Text('Current level: ${progress.currentLevel}'),
-                Text('Current XP: ${progress.experience} XP'),
+                Text('Current level: ${profile.progressLevel}'),
+                Text('Current XP: ${profile.progressExperience} XP'),
 
               ],
             );
