@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { fetchMessions, getSingleMission } from "../data/missions.database";
-import { getMissionEvents, saveEvent } from "../data/events.database";
+import { getMissionEvents, getQuestionEvents, saveEvent } from "../data/events.database";
 import { v6 as uuidv6 } from 'uuid';
 var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
@@ -19,8 +19,13 @@ missionsRouter.get("/:missionId/user/:userId", async (req: Request, res: Respons
   var mission = await getSingleMission(Number(missionId));
   var missionEvents = await getMissionEvents(missionId, userId);
   var missionIsAccomplished = missionEvents.find((event) => event.isCompleted)?.isCompleted ?? false;
-
   mission.accomplished = missionIsAccomplished;
+
+  for (let i = 0; i < mission.questions.length; i++) {
+    const element = mission.questions[i];
+    var answersToQuestion = await getQuestionEvents(element.questionId.toString(), userId);
+    element.isAnswered = answersToQuestion.length > 0;
+  }
 
   res.send(mission);
 });

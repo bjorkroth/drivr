@@ -29,7 +29,7 @@ class ProgressModel extends ChangeNotifier{
   Future<void> saveExperience(int amount, String userId) async{
     experience += amount;
     await _store.saveExperience(experience);
-    //await DatabaseProfileStorage().putUserExperience(experience, userId);
+    await DatabaseProfileStorage().putUserExperience(experience, userId);
     await updateUserLevel(userId);
     notifyListeners();
   }
@@ -43,6 +43,6 @@ class ProgressModel extends ChangeNotifier{
 
     await _store.updateUserLevel(userLevel);
     currentLevel = userLevel;
-    //await DatabaseProfileStorage().putUserLevel(userLevel, userId);
+    await DatabaseProfileStorage().putUserLevel(userLevel, userId);
   }
 }

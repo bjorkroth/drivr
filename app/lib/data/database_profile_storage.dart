@@ -67,10 +67,7 @@ class DatabaseProfileStorage extends ProfilePersistence{
   @override
   Future<void> putUserExperience(int progressExperience, String userId) async {
     try{
-      var body = jsonEncode({
-        'progressExperience': progressExperience
-      });
-      final response = await http.put(Uri.parse('$apiUrl/users/$userId/experience'),body: body);
+      final response = await http.put(Uri.parse('$apiUrl/users/$userId/experience/$progressExperience'));
 
       if(response.statusCode != 200){
         throw Exception("Could not update user experience ");
@@ -83,10 +80,7 @@ class DatabaseProfileStorage extends ProfilePersistence{
   @override
   Future<void> putUserLevel(int progressLevel, String userId) async {
     try{
-      var body = jsonEncode({
-        'progressLevel': progressLevel
-      });
-      final response = await http.put(Uri.parse('$apiUrl/users/$userId/level'),body: body);
+      final response = await http.put(Uri.parse('$apiUrl/users/$userId/level/$progressLevel'));
 
       if(response.statusCode != 200){
         throw Exception("Could not update user level ");

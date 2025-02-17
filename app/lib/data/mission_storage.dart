@@ -69,12 +69,12 @@ class MissionStorage {
 
   Future<void> postQuestionAnswer(int missionId, int questionId, String userId, bool isCorrect, String answer) async {
     try {
-      var body = jsonEncode({
+      var body = {
         "isCorrect": isCorrect,
         "answer": answer
-      });
+      };
       final response = await http.post(
-          Uri.parse('$apiUrl/missions/$missionId/question/$questionId/user/$userId/answer'),body: body);
+          Uri.parse('$apiUrl/missions/$missionId/question/$questionId/user/$userId/answer'),body: json.encode(body));
 
       if (response.statusCode != 201) {
         throw Exception("Could not accomplish mission");

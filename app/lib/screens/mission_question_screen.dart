@@ -1,30 +1,26 @@
+
 import 'package:drivr/widgets/drivr_app_layout.dart';
 import 'package:drivr/widgets/mission_question_item.dart';
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 
 import '../data/mission_storage.dart';
 import '../models/mission_model.dart';
-import '../widgets/drivr_app_bar.dart';
-import '../widgets/drivr_bottom_bar.dart';
-import '../widgets/drivr_drawer_menu.dart';
 import '../widgets/loading_progress_indicator.dart';
 
 class MissionQuestionScreen extends StatelessWidget {
   final int currentMissionId;
-  // final int currentQuestionId;
   final String currentUserId;
 
   const MissionQuestionScreen(
       {super.key,
       required this.currentMissionId,
-      // required this.currentQuestionId,
       required this.currentUserId});
 
   @override
   Widget build(BuildContext context) {
     return MissionQuestionContainer(
         currentMissionId: currentMissionId,
-        // currentQuestionId: currentQuestionId,
         currentUserId: currentUserId);
   }
 }
@@ -32,11 +28,9 @@ class MissionQuestionScreen extends StatelessWidget {
 class MissionQuestionContainer extends StatefulWidget {
   final int currentMissionId;
   final String currentUserId;
-  // final int currentQuestionId;
   const MissionQuestionContainer(
       {super.key,
       required this.currentMissionId,
-      // required this.currentQuestionId,
       required this.currentUserId});
 
   @override
@@ -54,7 +48,6 @@ class _MissionQuestionState extends State<MissionQuestionContainer> {
     super.initState();
     currentMissionFuture = MissionStorage()
         .getMissionById(widget.currentMissionId, widget.currentUserId);
-    // questionId = widget.currentQuestionId;
     currentUserId = widget.currentUserId;
     currentMissionId = widget.currentMissionId;
   }
@@ -68,28 +61,21 @@ class _MissionQuestionState extends State<MissionQuestionContainer> {
             var currentMission = snapshot.data;
             if (currentMission == null) return Container();
 
-            var questions = currentMission.questions;
+           var question = currentMission.questions.firstWhereOrNull((element) => element.isAnswered != true);
+
+           if(question == null){
+             return DrivrAppLayout(title: 'Mission $currentMissionId',
+                 child: const Text("All questions already answered for this mission"));
+           }
 
             return DrivrAppLayout(
-                title: 'Question ${questions[0].questionId}',
+                title: 'Question ${question.questionId}',
                 child: Center(
                     child: MissionQuestionItem(
-                  missionQuestion: questions[0],
+                  missionQuestion: question,
                   missionId: currentMission.id,
                   currentUserId: currentUserId,
                 )));
-
-            // return ListView.builder(
-            //     padding: const EdgeInsets.symmetric(vertical: 12),
-            //     itemCount: currentMission.questions.length,
-            //     shrinkWrap: true,
-            //     itemBuilder: (context, index) {
-            //       return MissionQuestionItem(
-            //         missionQuestion: questions[index],
-            //         missionId: currentMission.id,
-            //         currentUserId: currentUserId,
-            //       );
-            //     }););
           } else {
             return const LoadingProgressIndicator(
                 loadingText: "Loading Questions");
