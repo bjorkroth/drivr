@@ -25,10 +25,14 @@ usersRouter.get("/profileName/:profileName", async (req: Request, res: Response)
 });
 
 
-usersRouter.put("/:userId/experience", jsonParser, async (req: Request, res: Response) => {
+usersRouter.put("/:userId/experience/:experience", jsonParser, async (req: Request, res: Response) => {
     var userId = req.params.userId;
-    var experience = req.body.progressExperience;
-    var numberOfUpdated = await addExperienceById(userId, experience)
+    var experience = parseInt(req.params.experience);
+
+    var currentExperience = (await getUserById(userId)).progressExperience;
+    var updatedExperience = currentExperience + experience;
+    
+    var numberOfUpdated = await addExperienceById(userId, updatedExperience)
 
     if (numberOfUpdated === 1) {
         res.status(200).send()
@@ -38,10 +42,10 @@ usersRouter.put("/:userId/experience", jsonParser, async (req: Request, res: Res
     res.status(400).send()
 });
 
-usersRouter.put("/:userId/level", jsonParser, async (req: Request, res: Response) => {
+usersRouter.put("/:userId/level/:level", jsonParser, async (req: Request, res: Response) => {
     var userId = req.params.userId;
-    var experience = req.body.progressLevel;
-    var numberOfUpdated = await setUserProgressLevel(userId, experience)
+    var level = parseInt(req.params.level);
+    var numberOfUpdated = await setUserProgressLevel(userId, level)
 
     if (numberOfUpdated === 1) {
         res.status(200).send()
