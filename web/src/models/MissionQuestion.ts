@@ -3,4 +3,5 @@ export default interface MissionQuestion {
     question: string;
     answer: string;
     alternatives: string[];
+    isAnswered: boolean;
 }
