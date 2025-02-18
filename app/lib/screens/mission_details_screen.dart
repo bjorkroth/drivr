@@ -1,8 +1,8 @@
 import 'package:drivr/data/mission_storage.dart';
 import 'package:drivr/widgets/drivr_app_layout.dart';
 import 'package:drivr/widgets/loading_progress_indicator.dart';
-import 'package:drivr/widgets/mission_detail_icon_row_item.dart';
-import 'package:drivr/widgets/mission_question_item.dart';
+import 'package:drivr/widgets/missionDetails/mission_details_menu_pills.dart';
+import 'package:drivr/widgets/missionDetails/mission_detail_icon_row_item.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +11,7 @@ import '../auth/auth_provider.dart';
 import '../data/missionList.dart';
 import '../models/mission_model.dart';
 import '../models/progress_model.dart';
-import '../widgets/drivr_bottom_bar.dart';
-import '../widgets/drivr_app_bar.dart';
-import '../widgets/drivr_drawer_menu.dart';
+import '../widgets/missionDetails/mission_not_found.dart';
 
 class MissionDetailsScreen extends StatelessWidget {
   final int currentMissionId;
@@ -62,15 +60,10 @@ class _MissionDetailsState extends State<MissionDetailsContainer> {
             var currentMission = snapshot.data;
             var currentUserId = authProvider.currentUser;
 
-            if (currentMission == null) return Container();
+            if (currentMission == null) return const MissionNotFound();
 
             void navigateToMissionPage() {
               context.go('/missions');
-            }
-
-            void navigateToMissionQuestionsPage() {
-              var missionId = currentMission.id;
-              context.go('/missions/$missionId/questions');
             }
 
             void markAsAccomplished() async {
@@ -156,38 +149,7 @@ class _MissionDetailsState extends State<MissionDetailsContainer> {
                           horizontal: 10, vertical: 10),
                       child: Text(currentMission.description),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: SizedBox(
-                        height: 70,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ElevatedButton(
-                                onPressed: markAsAccomplished,
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.black,
-                                    foregroundColor: Colors.white),
-                                child: const MissionDetailIconRowItem(
-                                    text: " Exercises",
-                                    icon: Icons.sports_gymnastics,
-                                    textColor: Colors.white)),
-                            ElevatedButton(
-                                onPressed: navigateToMissionQuestionsPage,
-                                child: const MissionDetailIconRowItem(
-                                    text: " Quiz",
-                                    icon: Icons.question_answer,
-                                    textColor: Colors.black)),
-                            ElevatedButton(
-                                onPressed: markAsAccomplished,
-                                child: const MissionDetailIconRowItem(
-                                    text: " Read more",
-                                    icon: Icons.list,
-                                    textColor: Colors.black)),
-                          ],
-                        ),
-                      ),
-                    ),
+                    MissionDetailsMenuPills(currentMission: currentMission),
                   ],
                 ));
           } else {

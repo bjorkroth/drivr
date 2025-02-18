@@ -73,8 +73,6 @@ class AppRouter {
         return MissionQuestionScreen(
             currentMissionId:
             int.parse(state.pathParameters['missionId'] ?? ""),
-            // currentQuestionId:
-            // int.parse(state.pathParameters['questionId'] ?? ""),
             currentUserId: context.read<AuthProvider>().currentUser
         );
       },

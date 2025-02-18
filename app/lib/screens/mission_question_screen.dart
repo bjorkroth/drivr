@@ -1,6 +1,7 @@
 
 import 'package:drivr/widgets/drivr_app_layout.dart';
-import 'package:drivr/widgets/mission_question_item.dart';
+import 'package:drivr/widgets/missionQuestions/mission_all_questions_answered.dart';
+import 'package:drivr/widgets/missionQuestions/mission_question_item.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
@@ -64,8 +65,7 @@ class _MissionQuestionState extends State<MissionQuestionContainer> {
            var question = currentMission.questions.firstWhereOrNull((element) => element.isAnswered != true);
 
            if(question == null){
-             return DrivrAppLayout(title: 'Mission $currentMissionId',
-                 child: const Text("All questions already answered for this mission"));
+             return MissionAllQuestionsAnswered(title: 'Mission $currentMissionId');
            }
 
             return DrivrAppLayout(

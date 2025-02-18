@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../data/mission_storage.dart';
-import '../models/progress_model.dart';
+import '../../data/mission_storage.dart';
+import '../../models/progress_model.dart';
 
 class MissionQuestionItem extends StatelessWidget {
   const MissionQuestionItem(

@@ -10,16 +10,19 @@ class LoadingProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-      const CircularProgressIndicator(),
-      Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Text(loadingText,
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  decoration: TextDecoration.none))),
-    ]);
+    return Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+          const CircularProgressIndicator(),
+          Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Text(loadingText,
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      decoration: TextDecoration.none))),
+        ]));
   }
 }
