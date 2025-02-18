@@ -7,7 +7,12 @@ import 'drivr_drawer_menu.dart';
 class DrivrAppLayout extends StatelessWidget {
   final String title;
   final Widget child;
-  const DrivrAppLayout({super.key, required this.title, required this.child });
+  final int menuBarSelectedItem;
+  const DrivrAppLayout(
+      {super.key,
+      required this.title,
+      this.menuBarSelectedItem = 1,
+      required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +23,7 @@ class DrivrAppLayout extends StatelessWidget {
             child: Container()),
         drawer: const DrivrDrawerMenu(),
         body: child,
-        bottomNavigationBar: DrivrBottomBar(menuBarSelectedItem: 1));
+        bottomNavigationBar:
+            DrivrBottomBar(menuBarSelectedItem: menuBarSelectedItem));
   }
 }

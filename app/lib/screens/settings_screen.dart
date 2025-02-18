@@ -1,7 +1,5 @@
+import 'package:drivr/widgets/drivr_app_layout.dart';
 import 'package:flutter/material.dart';
-import '../widgets/drivr_app_bar.dart';
-import '../widgets/drivr_bottom_bar.dart';
-import '../widgets/drivr_drawer_menu.dart';
 import '../data/settings_data.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -22,13 +20,9 @@ class _SettingsScreen extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: DrivrAppBar(
-          title: 'Settings',
-          preferredSize: const Size.fromHeight(80.0),
-          child: Container()),
-      drawer: const DrivrDrawerMenu(),
-      body: Center(
+    return DrivrAppLayout(
+      title: "Settings",
+      child: Center(
           child: Column(
         children: [
           const Icon(
@@ -54,7 +48,6 @@ class _SettingsScreen extends State<SettingsScreen> {
               })
         ],
       )),
-      bottomNavigationBar: DrivrBottomBar(menuBarSelectedItem: 2),
     );
   }
 }

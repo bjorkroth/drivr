@@ -13,6 +13,7 @@ class AuthProvider extends ChangeNotifier{
   Future<void> getStatusFromStore() async{
     var sharedPreferences = await instanceFuture;
     _isLoggedIn = sharedPreferences.getBool('isLoggedIn') ?? false;
+    _currentUser = sharedPreferences.getString('currentUser') ?? "";
   }
 
   Future<bool> isUserLoggedIn() async{
@@ -25,12 +26,14 @@ class AuthProvider extends ChangeNotifier{
     _isLoggedIn = true;
     var sharedPreferences = await instanceFuture;
     await sharedPreferences.setBool('isLoggedIn', true);
+    await sharedPreferences.setString('currentUser', username);
     notifyListeners();
   }
 
   Future<void> logOutUser() async{
     var sharedPreferences = await instanceFuture;
     await sharedPreferences.setBool('isLoggedIn', false);
+    await sharedPreferences.setString('currentUser', "");
     _currentUser = "";
     _isLoggedIn = false;
     notifyListeners();

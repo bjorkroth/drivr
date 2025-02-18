@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../initializers/initializer.dart';
 import '../providers/app_provider.dart';
 import '../routing/app_router.dart';
 

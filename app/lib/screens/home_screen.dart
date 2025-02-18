@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../auth/auth_provider.dart';
+import '../models/progress_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.title});
@@ -31,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!authProvider.isLoggedIn || authProvider.currentUser.isEmpty) {
       context.go('/login');
     }
+
+    var progressProvider = context.read<ProgressModel>();
 
     // var currentUser = context.read<ProfileModel>();
     var currentUser = "Current user";
@@ -65,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: <Widget>[
                   HomeSliderCard(
                       title: 'Experience',
-                      cardValue: '965 XP',
+                      cardValue: '${progressProvider.experience} XP',
                       color: Colors.red,
                       heroAnimation: animation),
                   HomeSliderCard(
@@ -77,13 +80,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       heroAnimation: animation),
                   HomeSliderCard(
-                      title: 'Card 3',
-                      cardValue: 'Text text',
+                      title: 'Exercise',
+                      cardValue: 'Do the next exercise',
                       color: Colors.green,
                       heroAnimation: animation),
                   HomeSliderCard(
-                      title: 'Card 4',
-                      cardValue: 'Text text',
+                      title: 'Quiz',
+                      cardValue: 'Do the next quiz question',
                       color: Colors.orange,
                       heroAnimation: animation),
                   HomeSliderCard(

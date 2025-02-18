@@ -1,15 +1,11 @@
 import 'package:drivr/data/database_profile_storage.dart';
+import 'package:drivr/models/progress_model.dart';
 import 'package:drivr/widgets/drivr_app_layout.dart';
-import 'package:drivr/widgets/no_user_found.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:provider/provider.dart';
 import '../auth/auth_provider.dart';
-import '../models/profile_model.dart';
-import '../widgets/drivr_app_bar.dart';
-import '../widgets/drivr_bottom_bar.dart';
-import '../widgets/drivr_drawer_menu.dart';
 
 @JsonSerializable()
 class FormData {
@@ -40,6 +36,7 @@ class _Login extends State<LoginScreen> {
 
     void login() async {
       var authProvider = context.read<AuthProvider>();
+      var progressProvider = context.read<ProgressModel>();
 
       if (formData.name!.isEmpty) {
         return;
@@ -50,7 +47,9 @@ class _Login extends State<LoginScreen> {
 
       if (profile.id.isNotEmpty) {
         await authProvider.logInUser(profile.id ?? "");
-        // await profileModel.setName(formData.name ?? "");
+
+        await progressProvider.updateLocalValues(profile.progressExperience,
+            profile.progressLevel);
 
         navigateToProfilePage();
       }

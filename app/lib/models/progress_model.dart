@@ -26,6 +26,18 @@ class ProgressModel extends ChangeNotifier{
     }
   }
 
+  Future<void> updateLocalValues(int newExperience, int userLevel) async {
+    if(userLevel > currentLevel){
+      await _store.updateUserLevel(userLevel);
+      notifyListeners();
+    }
+
+    if(newExperience > experience){
+      await _store.saveExperience(newExperience);
+      notifyListeners();
+    }
+  }
+
   Future<void> saveExperience(int amount, String userId) async{
     experience += amount;
     await _store.saveExperience(experience);
