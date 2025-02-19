@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../auth/auth_provider.dart';
 
 class DrivrBottomBar extends StatelessWidget{
-  DrivrBottomBar({super.key, required this.menuBarSelectedItem});
+  const DrivrBottomBar({super.key, required this.menuBarSelectedItem});
 
   final int menuBarSelectedItem;
 

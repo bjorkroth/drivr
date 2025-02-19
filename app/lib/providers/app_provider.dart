@@ -3,10 +3,8 @@ import 'package:provider/single_child_widget.dart';
 
 import '../auth/auth_provider.dart';
 import '../data/local_storage_progress_persistence.dart';
-import '../data/local_storage_profile_storage.dart';
 import '../models/progress_model.dart';
 import '../data/missionList.dart';
-import '../models/profile_model.dart';
 
 class AppProvider{
   List<SingleChildWidget> providers = [
