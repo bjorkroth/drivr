@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/profile_model.dart';
-import '../models/progress_model.dart';
 
 class ProfileScreenDetails extends StatefulWidget {
   const ProfileScreenDetails({super.key});
@@ -18,7 +17,6 @@ class _ProfileScreenDetails extends State<ProfileScreenDetails> {
   @override
   Widget build(BuildContext context) {
     var authProvider = context.watch<AuthProvider>();
-    var progress = context.watch<ProgressModel>();
 
     Future<ProfileModel> profileFuture =
         DatabaseProfileStorage().getProfileById(authProvider.currentUser);

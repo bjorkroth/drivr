@@ -46,7 +46,7 @@ class _Login extends State<LoginScreen> {
           .getProfileByUserName(formData.name ?? "");
 
       if (profile.id.isNotEmpty) {
-        await authProvider.logInUser(profile.id ?? "");
+        await authProvider.logInUser(profile.id);
 
         await progressProvider.updateLocalValues(profile.progressExperience,
             profile.progressLevel);

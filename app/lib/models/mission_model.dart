@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'missionQuestion.dart';
+import 'mission_question.dart';
 class MissionModel{
   final int id;
   final String name;

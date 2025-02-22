@@ -1,4 +1,4 @@
-import 'package:drivr/models/missionQuestion.dart';
+import 'package:drivr/models/mission_question.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
