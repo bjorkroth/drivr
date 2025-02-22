@@ -1,4 +1,4 @@
-package com.example.drivr
+package se.bjorkroth.drivr
 
 import io.flutter.embedding.android.FlutterActivity
 

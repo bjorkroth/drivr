@@ -4,7 +4,7 @@ import 'package:provider/single_child_widget.dart';
 import '../auth/auth_provider.dart';
 import '../data/local_storage_progress_persistence.dart';
 import '../models/progress_model.dart';
-import '../data/missionList.dart';
+import '../data/mission_list.dart';
 
 class AppProvider{
   List<SingleChildWidget> providers = [
