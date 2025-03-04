@@ -1,3 +1,4 @@
+import MissionExercise from "./MissionExercise";
 import MissionQuestion from "./MissionQuestion";
 
 export default interface Mission{
@@ -7,7 +8,9 @@ export default interface Mission{
     accomplished:boolean;
     description:string;
     experienceEarned:number;
-    canBeDoneMultipleTimes:boolean;
     type:string;
     questions: MissionQuestion[];
+    exercies: MissionExercise[];
 }
+
+
