@@ -10,7 +10,7 @@ export default interface Mission{
     experienceEarned:number;
     type:string;
     questions: MissionQuestion[];
-    exercies: MissionExercise[];
+    exercises: MissionExercise[];
 }
 
 

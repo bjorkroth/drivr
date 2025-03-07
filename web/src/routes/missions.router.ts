@@ -1,7 +1,8 @@
 import express, { Request, Response } from "express";
-import { fetchMessions, getSingleMission } from "../data/missions.database";
+import { fetchMessions, getSingleMission, updateMissionExercise } from "../data/missions.database";
 import { getMissionEvents, getQuestionEvents, saveEvent } from "../data/events.database";
 import { v6 as uuidv6 } from 'uuid';
+import MissionExercise from "../models/MissionExercise";
 var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
 
@@ -28,6 +29,15 @@ missionsRouter.get("/:missionId/user/:userId", async (req: Request, res: Respons
   }
 
   res.send(mission);
+});
+
+
+missionsRouter.put("/exercises", jsonParser, async (req: Request, res: Response) => {
+  var reqBody : MissionExercise = req.body;
+
+  await updateMissionExercise(reqBody);
+
+  res.status(201).send();
 });
 
 missionsRouter.post("/:missionId/user/:userId/accomplish", jsonParser, async (req: Request, res: Response) => {
