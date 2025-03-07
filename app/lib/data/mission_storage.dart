@@ -84,6 +84,19 @@ class MissionStorage {
     }
   }
 
+  Future<void> postExerciseDone(int missionId, int exerciseId, String userId) async {
+    try {
+      final response = await http.post(
+          Uri.parse('$apiUrl/missions/$missionId/exercise/$exerciseId/user/$userId/done'));
+
+      if (response.statusCode != 201) {
+        throw Exception("Could not accomplish mission");
+      }
+    } catch (e) {
+      return;
+    }
+  }
+
   Future<void> writeMissions(List<MissionModel> missions) async {
     final filepath = await _localFile;
     var file = File(filepath);

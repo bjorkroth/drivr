@@ -36,7 +36,7 @@ class MissionDetailsMenuPills extends StatelessWidget {
                   backgroundColor: Colors.black, foregroundColor: Colors.white),
               child: const MissionDetailIconRowItem(
                   text: " Exercises",
-                  icon: Icons.sports_gymnastics,
+                  icon: Icons.directions_car,
                   textColor: Colors.white)),
           ElevatedButton(
               onPressed: navigateToMissionQuestionsPage,

@@ -1,3 +1,4 @@
+import 'package:drivr/screens/mission_exercise_list_screen.dart';
 import 'package:drivr/screens/mission_question_screen.dart';
 import 'package:drivr/screens/settings_screen.dart';
 import 'package:drivr/widgets/correct_question_answer.dart';
@@ -9,6 +10,7 @@ import '../auth/auth_provider.dart';
 import '../screens/home_screen.dart';
 import '../screens/login_screen.dart';
 import '../screens/mission_details_screen.dart';
+import '../screens/mission_exercise_screen.dart';
 import '../screens/missions_screen.dart';
 import '../screens/profile_screen.dart';
 import '../screens/shop_screen.dart';
@@ -84,6 +86,33 @@ class AppRouter {
 
       return const CorrectQuestionAnswer();
     }),
+    GoRoute(
+      path: '/missions/:missionId/exercises',
+      builder: (BuildContext context, GoRouterState state) {
+        if (!context.read<AuthProvider>().isLoggedIn) {
+          return const LoginScreen();
+        }
+        return MissionExerciseListScreen(
+            currentMissionId:
+            int.parse(state.pathParameters['missionId'] ?? ""),
+            currentUserId: context.read<AuthProvider>().currentUser
+        );
+      },
+    ),
+    GoRoute(
+      path: '/missions/:missionId/exercises/:exerciseId',
+      builder: (BuildContext context, GoRouterState state) {
+        if (!context.read<AuthProvider>().isLoggedIn) {
+          return const LoginScreen();
+        }
+        return MissionExerciseScreen(
+            currentMissionId:
+            int.parse(state.pathParameters['missionId'] ?? ""),
+            currentUserId: context.read<AuthProvider>().currentUser,
+          currentExerciseId: int.parse(state.pathParameters['exerciseId'] ?? ""),
+        );
+      },
+    ),
     GoRoute(
       path: '/shop',
       builder: (BuildContext context, GoRouterState state) {
