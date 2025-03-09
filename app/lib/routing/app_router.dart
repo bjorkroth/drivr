@@ -79,12 +79,13 @@ class AppRouter {
         );
       },
     ),
-    GoRoute(path: '/missions/questions/correct', builder: (BuildContext context, GoRouterState state){
+    GoRoute(path: '/missions/questions/correct/:xpEarned', builder: (BuildContext context, GoRouterState state){
       if (!context.read<AuthProvider>().isLoggedIn) {
         return const LoginScreen();
       }
+      var xpEarned = int.parse(state.pathParameters['xpEarned'] ?? "");
 
-      return const CorrectQuestionAnswer();
+      return CorrectQuestionAnswer(xpEarned: xpEarned);
     }),
     GoRoute(
       path: '/missions/:missionId/exercises',

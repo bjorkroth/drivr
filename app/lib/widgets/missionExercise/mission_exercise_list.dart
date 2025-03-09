@@ -17,7 +17,7 @@ class MissionExerciseList extends StatelessWidget {
     var playerLevel = context.read<ProgressModel>().currentLevel;
 
     return ListView.builder(
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 5),
         itemCount: missionExercises == null ? 0 : missionExercises.length,
         itemBuilder: (context, index) {
           if (missionExercises == null) return Container();

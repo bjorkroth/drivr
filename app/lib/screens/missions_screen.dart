@@ -35,33 +35,35 @@ class _MissionScreen extends State<MissionsScreen> {
           var missionsList = snapshot.data;
           if (snapshot.hasData &&
               snapshot.connectionState == ConnectionState.done) {
-            return ListView.builder(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                itemCount: missionsList == null ? 0 : missionsList.length,
-                itemBuilder: (context, index) {
-                  if (missionsList == null) return Container();
-                  const color = Colors.lime;
-                  var mission = missionsList[index];
+            return Container(
+                margin: EdgeInsets.symmetric(horizontal: 12),
+                child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    itemCount: missionsList == null ? 0 : missionsList.length,
+                    itemBuilder: (context, index) {
+                      if (missionsList == null) return Container();
+                      const color = Colors.lime;
+                      var mission = missionsList[index];
 
-                  if(mission.level > playerLevel) return Container();
+                      if (mission.level > playerLevel) return Container();
 
-                  return SafeArea(
-                      top: false,
-                      bottom: false,
-                      child: Hero(
-                          tag: index,
-                          child: MissionListCard(
-                            name: mission.name,
-                            level: mission.level,
-                            description: mission.description,
-                            color: color,
-                            heroAnimation: const AlwaysStoppedAnimation(0),
-                            isAccomplished: mission.accomplished,
-                            onPressed: () {
-                              context.go('/missions/${mission.id}');
-                            },
-                          )));
-                });
+                      return SafeArea(
+                          top: false,
+                          bottom: false,
+                          child: Hero(
+                              tag: index,
+                              child: MissionListCard(
+                                name: mission.name,
+                                level: mission.level,
+                                description: mission.description,
+                                color: color,
+                                heroAnimation: const AlwaysStoppedAnimation(0),
+                                isAccomplished: mission.accomplished,
+                                onPressed: () {
+                                  context.go('/missions/${mission.id}');
+                                },
+                              )));
+                    }));
           } else {
             return const LoadingProgressIndicator(
                 loadingText: "Loading missions");

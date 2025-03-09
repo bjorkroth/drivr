@@ -79,7 +79,7 @@ class _MissionQuestionState extends State<MissionQuestionContainer> {
                   loadingText: 'Exercise not found');
             }
 
-            if (exercise.isDone == true) {
+            if (exercise.isDone == true && !exercise.canBeDoneMultipleTimes) {
               return MissionAllExercisesDone(
                   title: 'Exercise $currentExerciseId');
             }

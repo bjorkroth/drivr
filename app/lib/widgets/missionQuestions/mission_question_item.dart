@@ -24,6 +24,7 @@ class MissionQuestionItem extends StatelessWidget {
     List<Widget> alternatives = [];
 
     String status = "";
+    var experienceEarned = 5;
 
     void navigateToMissionDetailsPage() {
       context.go('/missions/$missionId');
@@ -34,13 +35,13 @@ class MissionQuestionItem extends StatelessWidget {
     }
 
     void navigateToCorrectAnswerScreen() {
-      context.go('/missions/questions/correct');
+      context.go('/missions/questions/correct/$experienceEarned');
     }
 
     Future<void> answerQuestionCorrectly() async {
       await MissionStorage().postQuestionAnswer(
           missionId, missionQuestion.questionId, currentUserId, true, "");
-      await progressContext.saveExperience(5, currentUserId);
+      await progressContext.saveExperience(experienceEarned, currentUserId);
       navigateToCorrectAnswerScreen();
     }
 

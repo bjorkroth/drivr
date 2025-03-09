@@ -60,7 +60,7 @@ class _MissionExerciseListState extends State<MissionExerciseListContainer> {
             var currentMission = snapshot.data;
             if (currentMission == null) return Container();
 
-            var exercises = currentMission.exercises.where((element) => element.isDone != true);
+            var exercises = currentMission.exercises.where((element) => element.isDone != true || element.canBeDoneMultipleTimes);
 
             if(exercises.isEmpty){
               return MissionAllExercisesDone(title: 'Mission $currentMissionId');

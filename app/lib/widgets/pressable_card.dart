@@ -36,7 +36,7 @@ class _PressableCardState extends State<PressableCard> with SingleTickerProvider
           widget.onPressed?.call();
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8) * flatten,
+           padding: const EdgeInsets.symmetric(vertical: 16) * flatten,
           child: PhysicalModel(
             borderRadius: BorderRadius.circular(12 * flatten),
             clipBehavior: Clip.antiAlias,
